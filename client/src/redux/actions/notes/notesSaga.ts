@@ -1,26 +1,38 @@
-import { put, call } from 'redux-saga/effects';
-import { GET_NOTES, ERROR_NOTES } from '../actionTypes';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import axios, { AxiosResponse } from 'axios';
-import { Action } from 'redux';
-import { NotesState } from '../../reducers/notes/types';
-import { NOTES } from '../../endpoints';
+import { Note, NotesState } from '../../reducers/notes/types';
+import { BACKEND, NOTES } from '../../endpoints';
+import { addNote, getNotes, setNotes } from '../../reducers/notes/notesReducer';
+import { PayloadAction } from '@reduxjs/toolkit';
 
 type GetNotesResponse = AxiosResponse<NotesState>;
 
-interface ErrorAction extends Action<typeof ERROR_NOTES> {
-    error: string | unknown;
-}
-
-interface SetNotesAction extends Action<typeof GET_NOTES> {
-    notes: NotesState;
-}
-
-export function* getNotes() {
+export function* getNotesSaga() {
     try {
-        const response: GetNotesResponse = yield call(axios.get, NOTES);
+        const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}`);
         const notes: NotesState = response.data;
-        yield put<SetNotesAction>({ type: GET_NOTES, notes });
+        yield put(setNotes(notes));
     } catch (error) {
-        yield put<ErrorAction>({ type: ERROR_NOTES, error });
+        console.log(error);
     }
+}
+
+export function* addNotesSaga(action: PayloadAction<Note>) {
+    const requestBody = {
+        fav: action.payload.fav,
+        tags: action.payload.tags,
+    };
+
+    try {
+        yield call(axios.post, `${BACKEND}${NOTES}`, requestBody);
+        yield call(axios.get, `${BACKEND}${NOTES}`);
+        yield call(getNotesSaga);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export default function* notesSaga() {
+    yield takeEvery(getNotes.type, getNotesSaga);
+    yield takeEvery(addNote.type, addNotesSaga);
 }

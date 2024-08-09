@@ -1,5 +1,7 @@
 import { NotesState } from './types';
 
 export const initialState = {
-    notes: [] as NotesState,
+    items: [] as NotesState,
+    loading: false,
+    error: null,
 };

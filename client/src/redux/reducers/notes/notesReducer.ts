@@ -1,18 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-import { NotesState } from './types';
+import { Note, NotesState } from './types';
 
 export const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        setNotesId: (state, action: PayloadAction<NotesState>) => ({
+        getNotes(state) {
+            state.loading = true;
+            state.error = null;
+        },
+        setNotes: (state, action: PayloadAction<NotesState>) => ({
             ...state,
-            notes: action.payload,
+            loading: false,
+            items: [...action.payload],
+        }),
+        addNote: (state, _action: PayloadAction<Omit<Note, 'id'>>) => ({
+            ...state,
         }),
     },
 });
 
-export const { setNotesId } = notesSlice.actions;
+export const { setNotes, getNotes, addNote } = notesSlice.actions;
 
 export default notesSlice.reducer;
