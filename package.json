@@ -1,0 +1,18 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "npm run dev --prefix client",
+    "backend": "npm start --prefix backend",
+    "storybook": "npm run storybook --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run storybook\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
