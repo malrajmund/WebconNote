@@ -85,6 +85,7 @@ html {
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
     line-height: 1.4;
 }
@@ -182,6 +183,24 @@ q:before {
     top: -9999px;
 }
 
-.mapboxgl-ctrl-logo {
-    display: none !important;
+::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    height: 8px; /* Height of the scrollbar (for horizontal scrollbars) */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* The track (scrollbar background) */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* The thumb (scrollbar handle) */
+    border-radius: 10px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Darker on hover */
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0, 0, 0, 0.7); /* Even darker when active */
 }

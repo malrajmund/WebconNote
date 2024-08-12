@@ -1,2 +1,21 @@
-@import './Colors.scss';
+//base
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import './Base.scss';
+@import './Mixins.scss';
+@import './Variables.scss';
+
+//atoms
+@import '../components/atoms/Button/Button.scss';
+
+//molecules
+@import '../components/molecules/NoteListItem/NoteListItem.scss';
+@import '../components/molecules/NavigationBar/NavigationBar.scss';
+@import '../components/molecules/SideBar/SideBar.scss';
+@import '../components/molecules/FormField/FormField.scss';
+
+//organisms
+@import '../components/organisms/NotesList/NotesList.scss';
+@import '../components/organisms/Form/Form.scss';
+
+//templates
+@import '../components/templates/MainTemplate/MainTemplate.scss';

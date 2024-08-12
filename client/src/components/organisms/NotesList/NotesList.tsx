@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNote, getNotes } from '../../../redux/reducers/notes/notesReducer';
+import { deleteNote, getNotes } from '../../../redux/reducers/notes/notesReducer';
 import { Note } from '../../../redux/reducers/notes/types';
 import NoteListItem from '../../molecules/NoteListItem/NoteListItem';
 import { AppState } from '../../../redux/store';
+import { NoteVariant } from '../../molecules/NoteListItem/constants';
+import { useNavigate } from 'react-router-dom';
 
 const NotesList: React.FC = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const notes = useSelector((state: AppState) => state.notes.items);
 
-    const addListItem = () => {
-        dispatch(addNote({ tags: 'test', fav: false }));
+    const handleDelete = (id: string) => {
+        dispatch(deleteNote({ id: id }));
+    };
+
+    const handleEdit = (id: string) => {
+        navigate(`edit-note/${id}`);
     };
 
     useEffect(() => {
@@ -18,11 +25,23 @@ const NotesList: React.FC = () => {
     }, []);
 
     return (
-        <ul>
+        <ul className="notes__list">
             {notes &&
                 notes.length > 0 &&
-                notes.map((note: Note) => <NoteListItem key={note.id} id={note.id} fav={note.fav} tags={note.tags} />)}
-            <button onClick={() => addListItem()}>Dodaj</button>
+                notes.map((note: Note) => (
+                    <NoteListItem
+                        handleEdit={() => handleEdit(note.id)}
+                        handleDelete={() => handleDelete(note.id)}
+                        title={note.title}
+                        description={note.description}
+                        created_at={note.created_at}
+                        key={note.id}
+                        id={note.id}
+                        fav={note.fav}
+                        tags={note.tags}
+                        variant={NoteVariant[note.variant]}
+                    />
+                ))}
         </ul>
     );
 };

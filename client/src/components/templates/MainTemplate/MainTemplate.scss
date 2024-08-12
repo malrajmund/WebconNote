@@ -1,0 +1,12 @@
+.main-template {
+    &__content {
+        width: 92%;
+        margin-left: auto;
+        padding: 20px;
+    }
+    &__title {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+}

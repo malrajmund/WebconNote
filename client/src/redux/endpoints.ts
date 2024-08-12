@@ -8,6 +8,7 @@ export const BACKEND = 'http://localhost:3000';
  * {id} - id notatki
  * {fav} - czy jest w ulubionych?
  * {tags} - tag do kategoryzacji
+ * {...rest} - pozostałe pola
  *
  * @method GET
  * @description Zwraca notatke o podanym ID.
@@ -18,12 +19,15 @@ export const BACKEND = 'http://localhost:3000';
  * {id} - id notatki
  * {fav} - czy jest w ulubionych?
  * {tags} - tag do kategoryzacji
+ * {...rest} - pozostałe pola
  *
  * @method POST
  * @description Dodaje nową notatkę.
  * @body
  * {tags} - przypisane tagi do kategoryzacji
  * {fav} - czy jest w ulubionych?
+ * {...rest} - pozostałe pola
+ *
  * @returns
  * * Obiekt JSON z polami:
  * {id} - id notatki

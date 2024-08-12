@@ -1,0 +1,13 @@
+.form {
+    &__wrapper {
+        border: 1px solid $color-gray;
+        padding: 30px;
+        border-radius: $border-radius;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    &__button-wrapper {
+        margin-left: auto;
+        width: min-content;
+    }
+}

@@ -5,11 +5,7 @@ interface NavigationBarProps {
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ children }) => {
-    return (
-        <nav className="nav">
-            <ul className="nav-list">{children}</ul>
-        </nav>
-    );
+    return <nav className="navigation__wrapper">{children}</nav>;
 };
 
 export default NavigationBar;

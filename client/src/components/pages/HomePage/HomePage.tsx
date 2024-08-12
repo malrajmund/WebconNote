@@ -4,11 +4,9 @@ import NotesList from '../../organisms/NotesList/NotesList';
 
 const HomePage: React.FC = () => {
     return (
-        <div>
-            <MainTemplate>
-                <NotesList />
-            </MainTemplate>
-        </div>
+        <MainTemplate noHeader noFooter isHomepage title="Homepage">
+            <NotesList />
+        </MainTemplate>
     );
 };
 
