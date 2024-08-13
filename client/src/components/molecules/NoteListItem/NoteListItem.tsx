@@ -8,7 +8,8 @@ import { deleteNote, setNote } from '../../../redux/reducers/notes/notesReducer'
 import { useDispatch } from 'react-redux';
 import Modal from '../../organisms/Modal/Modal';
 import Tag from '../../atoms/Tag/Tag';
-import EditNoteModal from '../../organisms/Modal/Variant/EditNoteModal';
+import EditNoteModal from '../../organisms/Modal/Variant/EditNoteModal/EditNoteModal';
+import AddTagModal from '../../organisms/Modal/Variant/AddTagModal/AddTagModal';
 
 type NoteProps = ComponentPropsWithoutRef<'li'> & {
     variant: NoteVariantType;
@@ -73,7 +74,16 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
             <div className="note__footer">
                 <div className="note__date">{created_at}</div>
                 <div className="note__tags-wrapper">
-                    {tags ? <Tag label="tag" /> : <Button buttonVariant={ButtonVariant.note} iconVariant="add" />}
+                    <Modal
+                        id={id}
+                        title="Add tag"
+                        onOpen={handleEditNoteThroughModal}
+                        trigger={<Button buttonVariant={ButtonVariant.note} iconVariant="add" />}
+                        noHeight
+                    >
+                        <AddTagModal />
+                    </Modal>
+                    {tags && tags.split(',').map((tag, index) => <Tag key={index} label={tag} />)}
                 </div>
             </div>
         </li>

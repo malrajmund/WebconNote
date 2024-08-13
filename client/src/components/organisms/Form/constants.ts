@@ -14,3 +14,13 @@ export const noteFields = [
         value: '',
     },
 ];
+
+export const tagFields = [
+    {
+        id: 'tags',
+        label: 'Tags',
+        type: 'text',
+        placeholder: 'Enter your tags (seperated by ",")',
+        value: '',
+    },
+];

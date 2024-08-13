@@ -6,10 +6,15 @@
         max-width: 600px;
         margin: 0 auto;
         &--modal {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             border: none;
+            height: 100%;
         }
     }
     &__button-wrapper {
+        margin-top: auto;
         margin-left: auto;
         width: min-content;
     }

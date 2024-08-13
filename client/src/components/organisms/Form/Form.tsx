@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormField from '../../molecules/FormField/FormField';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
@@ -24,7 +24,6 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
     );
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = event.target;
         setFormData(prevData => ({ ...prevData, [id]: value }));
@@ -35,6 +34,11 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal
         onSubmit(formData);
         navigate('/');
     };
+
+    useEffect(() => {
+        let newFields = fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {});
+        setFormData(newFields);
+    }, [fields]);
 
     return (
         <form className={`form__wrapper${inModal ? '--modal' : ''}`} onSubmit={handleSubmit}>

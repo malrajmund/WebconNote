@@ -13,7 +13,7 @@ const AddNotePage: React.FC = () => {
                 created_at: new Date().toISOString().split('T')[0].split('-').reverse().join('.'),
                 title: formData.title,
                 description: formData.description,
-                tags: null,
+                tags: '',
                 fav: false,
             })
         );

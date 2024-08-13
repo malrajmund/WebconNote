@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
 import { Note, NotesState } from './types';
+import { MakeOptionalExceptId } from '../../../global.types';
 
 export const notesSlice = createSlice({
     name: 'notes',
@@ -35,6 +36,7 @@ export const notesSlice = createSlice({
                 description: action.payload.description,
                 variant: action.payload.variant,
                 id: action.payload.id,
+                tags: action.payload.tags,
                 loading: false,
             },
         }),
@@ -42,7 +44,7 @@ export const notesSlice = createSlice({
             ...state,
             currentNote: initialState.currentNote,
         }),
-        updateNote: (state, _action: PayloadAction<Pick<Note, 'id' | 'title' | 'description'>>) => ({
+        updateNote: (state, _action: PayloadAction<MakeOptionalExceptId<Note>>) => ({
             ...state,
             loading: true,
         }),

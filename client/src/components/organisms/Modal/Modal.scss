@@ -1,18 +1,25 @@
 .popup {
     &-content {
         margin: auto;
-        background: rgb(255, 255, 255);
+        background: $color-white;
         width: 30%;
         padding: 25px;
         border-radius: $border-radius;
         position: relative;
     }
     &-overlay {
-        background: rgba(0, 0, 0, 0.5);
+        background: $color-low-transparent;
     }
     &-header {
         text-align: center;
         font-size: 24px;
         margin-bottom: 30px;
+    }
+    &-body {
+        height: 300px;
+        position: relative;
+        &--no-height {
+            height: 100px;
+        }
     }
 }

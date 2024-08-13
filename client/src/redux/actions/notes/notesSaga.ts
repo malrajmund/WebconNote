@@ -71,6 +71,7 @@ export function* updateNoteSaga(action: PayloadAction<Note>) {
     const requestBody = {
         title: action.payload.title,
         description: action.payload.description,
+        tags: action.payload.tags ? action.payload.tags : '',
     };
     try {
         yield call(axios.put, `${BACKEND}${NOTES}/${id}`, requestBody);

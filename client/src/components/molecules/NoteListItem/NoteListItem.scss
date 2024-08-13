@@ -45,7 +45,15 @@
     }
 
     &__tags-wrapper {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        flex: 0.75;
+        flex-wrap: wrap;
+        gap: 5px;
         margin-left: auto;
+        max-height: 50px;
+        overflow-y: auto;
     }
 
     &--primary {

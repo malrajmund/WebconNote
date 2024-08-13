@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'storybook/internal/components';
-import { updateNote, clearNote, getNote } from '../../../../redux/reducers/notes/notesReducer';
-import { AppState } from '../../../../redux/store';
-import Form, { FormFieldConfig } from '../../Form/Form';
-import { useEffect } from 'react';
-import { noteFields } from '../../Form/constants';
+import { updateNote, clearNote } from '../../../../../redux/reducers/notes/notesReducer';
+import { AppState } from '../../../../../redux/store';
+import Form, { FormFieldConfig } from '../../../Form/Form';
+import { useEffect, useState } from 'react';
+import { noteFields } from '../../../Form/constants';
 
 type EditNoteModalProps = {
     setIsOpen?: (isOpen: boolean) => void;
-    fields?: FormFieldConfig[];
     isOpen?: boolean;
 };
 
@@ -16,6 +15,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ setIsOpen, isOpen }) => {
     const dispatch = useDispatch();
     const isLoading = useSelector((state: AppState) => state.notes.currentNote.loading);
     const editNote = useSelector((state: AppState) => state.notes.currentNote);
+    const [fields, setFields] = useState<FormFieldConfig[]>([]);
 
     const handleFormSubmit = (formData: Record<string, string>) => {
         dispatch(
@@ -26,25 +26,20 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ setIsOpen, isOpen }) => {
     };
 
     useEffect(() => {
-        if (editNote.id && isOpen) {
-            dispatch(getNote({ id: editNote.id }));
+        if (isOpen) {
+            let newFields = noteFields.map(field => ({
+                ...field,
+                value: editNote[field.id] ? editNote[field.id] : field.value,
+            }));
+            console.log(newFields);
+            setFields([...newFields]);
         }
-    }, [isOpen, editNote.id]);
+    }, [isOpen]);
 
     return isLoading ? (
         <Loader />
     ) : (
-        <>
-            <Form
-                fields={noteFields.map(field => ({
-                    ...field,
-                    value: editNote[field.id] ? editNote[field.id] : field.value,
-                }))}
-                onSubmit={handleFormSubmit}
-                submitButtonText={'Save'}
-                inModal
-            />
-        </>
+        <Form fields={fields} onSubmit={handleFormSubmit} submitButtonText={'Save'} inModal />
     );
 };
 

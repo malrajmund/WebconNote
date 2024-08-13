@@ -9,9 +9,10 @@ type ModalProps = {
     id: string;
     children: React.ReactElement;
     onOpen: () => void;
+    noHeight?: boolean;
 };
 
-const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen }) => {
+const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeight }) => {
     const [isOpen, setIsOpen] = useState(false);
     const childWithProps = React.cloneElement(children, { setIsOpen, isOpen });
 
@@ -31,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen }) => {
         >
             <Button buttonVariant={ButtonVariant.icon} iconVariant="back" onClick={() => setIsOpen(false)} isAbsolute />
             <h2 className="popup-header">{title}</h2>
-            {childWithProps}
+            <div className={`popup-body ${noHeight ? 'popup-body--no-height' : ''}`}>{childWithProps}</div>
         </Popup>
     );
 };
