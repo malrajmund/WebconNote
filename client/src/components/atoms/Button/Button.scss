@@ -35,7 +35,7 @@
     }
     &--note {
         background-color: transparent;
-        color: rgba(0, 0, 0, 0.3);
+        color: $color-semi-transparent;
         transition: 0.6s ease color;
         &:hover {
             color: $color-black;
@@ -44,5 +44,10 @@
             height: 16px;
             width: 16px;
         }
+    }
+    &--absolute {
+        position: absolute;
+        top: 20px;
+        left: 20px;
     }
 }

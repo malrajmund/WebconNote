@@ -7,11 +7,16 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     iconVariant?: IconVariant;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     buttonVariant: ButtonVariantType;
+    isAbsolute?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, buttonVariant, onClick, iconVariant, type }) => {
+const Button: React.FC<ButtonProps> = ({ children, buttonVariant, onClick, iconVariant, type, isAbsolute }) => {
     return (
-        <button type={type} onClick={onClick && onClick} className={`button button--${buttonVariant}`}>
+        <button
+            type={type}
+            onClick={onClick && onClick}
+            className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
+        >
             {iconVariant && <Icon variant={iconVariant} />}
             {children && buttonVariant !== 'icon' && buttonVariant !== 'note' && children}
         </button>

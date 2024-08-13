@@ -19,6 +19,7 @@ export const initialState: InitialState = {
         title: '',
         description: '',
         variant: null,
+        loading: false,
     },
     loading: false,
     error: null,

@@ -26,21 +26,20 @@ export const notesSlice = createSlice({
         }),
         getNote: (state, _action: PayloadAction<Pick<Note, 'id'>>) => ({
             ...state,
-            loading: true,
+            currentNote: { ...state.currentNote, loading: true },
         }),
         setNote: (state, action: PayloadAction<Note>) => ({
             ...state,
-            loading: false,
             currentNote: {
                 title: action.payload.title,
                 description: action.payload.description,
                 variant: action.payload.variant,
                 id: action.payload.id,
+                loading: false,
             },
         }),
         clearNote: (state, _action: PayloadAction) => ({
             ...state,
-            loading: false,
             currentNote: initialState.currentNote,
         }),
         updateNote: (state, _action: PayloadAction<Pick<Note, 'id' | 'title' | 'description'>>) => ({

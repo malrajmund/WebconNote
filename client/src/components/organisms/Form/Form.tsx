@@ -16,9 +16,10 @@ interface FormProps {
     fields: FormFieldConfig[];
     onSubmit: (formData: Record<string, string>) => void;
     submitButtonText: string;
+    inModal?: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText }) => {
+const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal = false }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
@@ -36,7 +37,7 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText }) => {
     };
 
     return (
-        <form className="form__wrapper" onSubmit={handleSubmit}>
+        <form className={`form__wrapper${inModal ? '--modal' : ''}`} onSubmit={handleSubmit}>
             {fields.map(field => (
                 <FormField
                     key={field.id}

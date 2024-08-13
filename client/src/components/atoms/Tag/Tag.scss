@@ -1,0 +1,9 @@
+.tag {
+    &__wrapper {
+        background-color: $color-black;
+        color: $color-white;
+        border-radius: $border-radius;
+        font-size: 12px;
+        padding: 2px 10px;
+    }
+}

@@ -6,7 +6,6 @@
     flex-direction: column;
     height: 330px;
     text-overflow: ellipsis;
-
     &__header {
         display: flex;
         > button:first-of-type {
@@ -15,8 +14,14 @@
     }
 
     &__title {
+        cursor: pointer;
         font-weight: 500;
         font-size: 16px;
+        color: $color-black;
+        transition: 0.3s ease color;
+        &:hover {
+            color: $color-semi-transparent;
+        }
     }
 
     &__description {
@@ -29,10 +34,18 @@
         overflow-y: auto;
     }
 
-    &__created-date {
+    &__date {
         margin-top: auto;
         font-size: 12px;
         font-weight: 100;
+    }
+
+    &__footer {
+        display: flex;
+    }
+
+    &__tags-wrapper {
+        margin-left: auto;
     }
 
     &--primary {
