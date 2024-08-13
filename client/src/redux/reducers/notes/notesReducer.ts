@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialState } from './initialState';
+import { InitialState, initialState } from './initialState';
 import { Note, NotesState } from './types';
 import { MakeOptionalExceptId } from '../../../global.types';
 
@@ -48,9 +48,14 @@ export const notesSlice = createSlice({
             ...state,
             loading: true,
         }),
+        setFilter: (state, action: PayloadAction<Pick<InitialState, 'filter'>>) => ({
+            ...state,
+            filter: action.payload.filter,
+        }),
     },
 });
 
-export const { setNotes, getNotes, addNote, deleteNote, getNote, setNote, updateNote, clearNote } = notesSlice.actions;
+export const { setNotes, getNotes, addNote, deleteNote, getNote, setNote, updateNote, clearNote, setFilter } =
+    notesSlice.actions;
 
 export default notesSlice.reducer;

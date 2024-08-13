@@ -1,1 +1,1 @@
-export type IconVariant = 'add' | 'edit' | 'delete' | 'back';
+export type IconVariant = 'add' | 'edit' | 'delete' | 'back' | 'filter' | 'search';

@@ -5,9 +5,10 @@ interface CurrentNote extends Omit<Note, 'id' | 'variant'> {
     id: string | null;
     variant: NoteVariantType | null;
 }
-interface InitialState {
+export interface InitialState {
     items: NotesState;
     currentNote: CurrentNote;
+    filter: null | string;
     loading: boolean;
     error: string | null;
 }
@@ -21,6 +22,7 @@ export const initialState: InitialState = {
         variant: null,
         loading: false,
     },
+    filter: null,
     loading: false,
     error: null,
 };

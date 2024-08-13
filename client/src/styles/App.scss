@@ -12,13 +12,15 @@
 //molecules
 @import '../components/molecules/NoteListItem/NoteListItem.scss';
 @import '../components/molecules/NavigationBar/NavigationBar.scss';
-@import '../components/molecules/SideBar/SideBar.scss';
+
 @import '../components/molecules/FormField/FormField.scss';
+@import '../components/molecules/FilterPanel/FilterPanel.scss';
 
 //organisms
 @import '../components/organisms/NotesList/NotesList.scss';
 @import '../components/organisms/Form/Form.scss';
 @import '../components/organisms/Modal/Modal.scss';
+@import '../components/organisms/SideBar/SideBar.scss';
 
 //templates
 @import '../components/templates/MainTemplate/MainTemplate.scss';

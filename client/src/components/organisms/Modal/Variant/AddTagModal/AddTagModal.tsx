@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateNote, clearNote } from '../../../../../redux/reducers/notes/notesReducer';
+import { clearNote } from '../../../../../redux/reducers/notes/notesReducer';
 import { AppState } from '../../../../../redux/store';
 import Form, { FormFieldConfig } from '../../../Form/Form';
 import { tagFields } from '../../../Form/constants';
 import Loader from '../../../../atoms/Loader/Loader';
 import { useEffect, useState } from 'react';
+import { addTag } from '../../../../../redux/reducers/tags/tagsReducer';
 
 type AddTagModalProps = {
     setIsOpen?: (isOpen: boolean) => void;
@@ -18,7 +19,7 @@ const AddTagModal: React.FC<AddTagModalProps> = ({ setIsOpen, isOpen }) => {
     const [fields, setFields] = useState<FormFieldConfig[]>([]);
 
     const handleFormSubmit = (formData: Record<string, string>) => {
-        dispatch(updateNote({ id: editNote.id ? editNote.id : '', tags: formData.tags }));
+        dispatch(addTag({ id: editNote.id ? editNote.id : '', tags: formData.tags }));
         dispatch(clearNote());
         setIsOpen && setIsOpen(false);
     };

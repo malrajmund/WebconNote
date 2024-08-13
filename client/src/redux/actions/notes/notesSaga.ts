@@ -7,17 +7,30 @@ import {
     deleteNote,
     getNote,
     getNotes,
+    setFilter,
     setNote,
     setNotes,
     updateNote,
 } from '../../reducers/notes/notesReducer';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { InitialState } from '../../reducers/notes/initialState';
 
 type GetNotesResponse = AxiosResponse<NotesState>;
 
 export function* getNotesSaga() {
     try {
         const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}`);
+        const notes: NotesState = response.data;
+        yield put(setNotes(notes));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* getNotesByFilter(action: PayloadAction<Pick<InitialState, 'filter'>>) {
+    const tag = action.payload.filter;
+    try {
+        const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}/tags/${tag}`);
         const notes: NotesState = response.data;
         yield put(setNotes(notes));
     } catch (error) {
@@ -71,7 +84,6 @@ export function* updateNoteSaga(action: PayloadAction<Note>) {
     const requestBody = {
         title: action.payload.title,
         description: action.payload.description,
-        tags: action.payload.tags ? action.payload.tags : '',
     };
     try {
         yield call(axios.put, `${BACKEND}${NOTES}/${id}`, requestBody);
@@ -88,4 +100,5 @@ export default function* notesSaga() {
     yield takeEvery(deleteNote.type, deleteNoteSaga);
     yield takeEvery(getNote.type, getNoteById);
     yield takeEvery(updateNote.type, updateNoteSaga);
+    yield takeEvery(setFilter.type, getNotesByFilter);
 }
