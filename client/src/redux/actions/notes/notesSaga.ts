@@ -30,9 +30,15 @@ export function* getNotesSaga() {
 export function* getNotesByFilter(action: PayloadAction<Pick<InitialState, 'filter'>>) {
     const tag = action.payload.filter;
     try {
-        const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}/tags/${tag}`);
-        const notes: NotesState = response.data;
-        yield put(setNotes(notes));
+        if (tag !== '') {
+            const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}/tags/${tag}`);
+            const notes: NotesState = response.data;
+            yield put(setNotes(notes));
+        } else {
+            const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}`);
+            const notes: NotesState = response.data;
+            yield put(setNotes(notes));
+        }
     } catch (error) {
         console.log(error);
     }

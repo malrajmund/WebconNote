@@ -10,10 +10,17 @@ import { AppState } from '../../../redux/store';
 const FilterPanel: React.FC = () => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
+    const [activeFilter, setActiveFilter] = useState<string>('');
     const { items } = useSelector((state: AppState) => state.tags);
 
     const handleFilter = (filter: string) => {
+        setActiveFilter(filter);
         dispatch(setFilter({ filter: filter }));
+    };
+
+    const handleResetFilter = () => {
+        setActiveFilter('');
+        dispatch(setFilter({ filter: '' }));
     };
 
     useEffect(() => {
@@ -24,12 +31,19 @@ const FilterPanel: React.FC = () => {
         <div className="filter-panel__wrapper">
             <Button buttonVariant={ButtonVariant.icon} iconVariant="filter" onClick={() => setIsOpen(!isOpen)} />
             {isOpen && (
-                <div className="filter-panel__tags">
-                    {items &&
-                        items
-                            .filter(tag => tag !== '')
-                            .map((tag: string) => <Tag label={tag} onClick={() => handleFilter(tag)} />)}
-                </div>
+                <>
+                    <div className="filter-panel__tags">
+                        {items &&
+                            items
+                                .filter(tag => tag !== '')
+                                .map((tag: string) => (
+                                    <Tag activeFilter={activeFilter} label={tag} onClick={() => handleFilter(tag)} />
+                                ))}
+                    </div>
+                    <Button buttonVariant={ButtonVariant.light} onClick={() => handleResetFilter()}>
+                        Reset
+                    </Button>
+                </>
             )}
         </div>
     );
