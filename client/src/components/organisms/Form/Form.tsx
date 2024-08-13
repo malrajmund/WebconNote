@@ -4,7 +4,7 @@ import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import { useNavigate } from 'react-router-dom';
 
-interface FormFieldConfig {
+export interface FormFieldConfig {
     id: string;
     label: string;
     type?: string;

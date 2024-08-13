@@ -10,17 +10,20 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     isAbsolute?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, buttonVariant, onClick, iconVariant, type, isAbsolute }) => {
-    return (
-        <button
-            type={type}
-            onClick={onClick && onClick}
-            className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
-        >
-            {iconVariant && <Icon variant={iconVariant} />}
-            {children && buttonVariant !== 'icon' && buttonVariant !== 'note' && children}
-        </button>
-    );
-};
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+    ({ children, buttonVariant, onClick, iconVariant, type = 'button', isAbsolute }, ref) => {
+        return (
+            <button
+                ref={ref}
+                type={type}
+                onClick={onClick && onClick}
+                className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
+            >
+                {iconVariant && <Icon variant={iconVariant} />}
+                {children && buttonVariant !== 'icon' && buttonVariant !== 'note' && children}
+            </button>
+        );
+    }
+);
 
 export default Button;

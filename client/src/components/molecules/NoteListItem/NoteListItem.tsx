@@ -4,10 +4,11 @@ import { NoteVariantType } from './NoteListItem.types';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import { useNavigate } from 'react-router-dom';
-import { deleteNote } from '../../../redux/reducers/notes/notesReducer';
+import { deleteNote, setNote } from '../../../redux/reducers/notes/notesReducer';
 import { useDispatch } from 'react-redux';
 import Modal from '../../organisms/Modal/Modal';
 import Tag from '../../atoms/Tag/Tag';
+import EditNoteModal from '../../organisms/Modal/Variant/EditNoteModal';
 
 type NoteProps = ComponentPropsWithoutRef<'li'> & {
     variant: NoteVariantType;
@@ -15,7 +16,7 @@ type NoteProps = ComponentPropsWithoutRef<'li'> & {
 
 const NoteListItem: React.FC<Note & NoteProps> = ({
     tags,
-    // fav,
+    fav,
     id,
     variant = 'primary',
     created_at,
@@ -24,6 +25,20 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const handleEditNoteThroughModal = () => {
+        dispatch(
+            setNote({
+                title: title,
+                description: description,
+                variant: variant,
+                id: id,
+                created_at: created_at,
+                tags: tags,
+                fav: fav,
+            })
+        );
+    };
 
     const handleEdit = (id: string): void => {
         navigate(`edit-note/${id}`);
@@ -43,8 +58,11 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                 <Modal
                     id={id}
                     title="Edit note"
+                    onOpen={handleEditNoteThroughModal}
                     trigger={<Button buttonVariant={ButtonVariant.note} iconVariant="edit" />}
-                />
+                >
+                    <EditNoteModal />
+                </Modal>
                 <Button
                     buttonVariant={ButtonVariant.note}
                     iconVariant="delete"
@@ -55,7 +73,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
             <div className="note__footer">
                 <div className="note__date">{created_at}</div>
                 <div className="note__tags-wrapper">
-                    {!tags ? <Tag label="tag" /> : <Button buttonVariant={ButtonVariant.note} iconVariant="add" />}
+                    {tags ? <Tag label="tag" /> : <Button buttonVariant={ButtonVariant.note} iconVariant="add" />}
                 </div>
             </div>
         </li>
