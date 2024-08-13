@@ -2,7 +2,15 @@ import { put, call, takeEvery } from 'redux-saga/effects';
 import axios, { AxiosResponse } from 'axios';
 import { Note, NotesState } from '../../reducers/notes/types';
 import { BACKEND, NOTES } from '../../endpoints';
-import { addNote, deleteNote, getNote, getNotes, setNote, setNotes } from '../../reducers/notes/notesReducer';
+import {
+    addNote,
+    deleteNote,
+    getNote,
+    getNotes,
+    setNote,
+    setNotes,
+    updateNote,
+} from '../../reducers/notes/notesReducer';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 type GetNotesResponse = AxiosResponse<NotesState>;
@@ -58,9 +66,25 @@ export function* deleteNoteSaga(action: PayloadAction<Note>) {
     }
 }
 
+export function* updateNoteSaga(action: PayloadAction<Note>) {
+    const id = action.payload.id;
+    const requestBody = {
+        title: action.payload.title,
+        description: action.payload.description,
+    };
+    try {
+        yield call(axios.put, `${BACKEND}${NOTES}/${id}`, requestBody);
+        yield call(axios.get, `${BACKEND}${NOTES}`);
+        yield call(getNotesSaga);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export default function* notesSaga() {
     yield takeEvery(getNotes.type, getNotesSaga);
     yield takeEvery(addNote.type, addNoteSaga);
     yield takeEvery(deleteNote.type, deleteNoteSaga);
     yield takeEvery(getNote.type, getNoteById);
+    yield takeEvery(updateNote.type, updateNoteSaga);
 }

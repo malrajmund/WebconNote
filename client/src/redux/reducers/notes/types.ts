@@ -5,7 +5,7 @@ export interface Note {
     fav: boolean;
     tags: string;
     variant: NoteVariantType;
-    created_at: Date;
+    created_at: string;
     description: string;
     title: string;
     [key: string]: unknown;

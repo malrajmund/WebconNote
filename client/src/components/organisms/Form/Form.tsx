@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import FormField from '../../molecules/FormField/FormField';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
+import { useNavigate } from 'react-router-dom';
 
 interface FormFieldConfig {
     id: string;
     label: string;
     type?: string;
     placeholder?: string;
-    value: string;
+    value: string | unknown;
 }
 
 interface FormProps {
     fields: FormFieldConfig[];
     onSubmit: (formData: Record<string, string>) => void;
+    submitButtonText: string;
 }
 
-const Form: React.FC<FormProps> = ({ fields, onSubmit }) => {
+const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText }) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
     );
@@ -29,6 +32,7 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit }) => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         onSubmit(formData);
+        navigate('/');
     };
 
     return (
@@ -46,7 +50,7 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit }) => {
             ))}
             <div className="form__button-wrapper">
                 <Button type="submit" buttonVariant={ButtonVariant.light} onClick={handleSubmit}>
-                    Add
+                    {submitButtonText}
                 </Button>
             </div>
         </form>

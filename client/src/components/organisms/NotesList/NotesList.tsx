@@ -1,37 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteNote, getNotes } from '../../../redux/reducers/notes/notesReducer';
-import { Note } from '../../../redux/reducers/notes/types';
+import React, { ComponentPropsWithoutRef } from 'react';
+import { Note, NotesState } from '../../../redux/reducers/notes/types';
 import NoteListItem from '../../molecules/NoteListItem/NoteListItem';
-import { AppState } from '../../../redux/store';
 import { NoteVariant } from '../../molecules/NoteListItem/constants';
-import { useNavigate } from 'react-router-dom';
 
-const NotesList: React.FC = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const notes = useSelector((state: AppState) => state.notes.items);
+type NoteListProps = ComponentPropsWithoutRef<'ul'> & {
+    notes: NotesState;
+};
 
-    const handleDelete = (id: string) => {
-        dispatch(deleteNote({ id: id }));
-    };
-
-    const handleEdit = (id: string) => {
-        navigate(`edit-note/${id}`);
-    };
-
-    useEffect(() => {
-        dispatch(getNotes());
-    }, []);
-
+const NotesList: React.FC<NoteListProps> = ({ notes }) => {
     return (
         <ul className="notes__list">
             {notes &&
                 notes.length > 0 &&
                 notes.map((note: Note) => (
                     <NoteListItem
-                        handleEdit={() => handleEdit(note.id)}
-                        handleDelete={() => handleDelete(note.id)}
                         title={note.title}
                         description={note.description}
                         created_at={note.created_at}

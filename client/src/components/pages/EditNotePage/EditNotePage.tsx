@@ -1,35 +1,23 @@
 import React, { useEffect } from 'react';
 import MainTemplate from '../../templates/MainTemplate/MainTemplate';
 import Form from '../../organisms/Form/Form';
-import { useDispatch } from 'react-redux';
-import { addNote, getNote } from '../../../redux/reducers/notes/notesReducer';
-import { getNoteById } from '../../../redux/actions/notes/notesSaga';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearNote, getNote, updateNote } from '../../../redux/reducers/notes/notesReducer';
 import { useNavigate, useParams } from 'react-router-dom';
-
-let formFields = [
-    {
-        id: 'title',
-        label: 'Title',
-        type: 'text',
-        placeholder: 'Enter your title',
-        value: '',
-    },
-    {
-        id: 'description',
-        label: 'Description',
-        type: 'textarea',
-        placeholder: 'Enter your description',
-        value: '',
-    },
-];
+import { noteFields } from '../../organisms/Form/constants';
+import { AppState } from '../../../redux/store';
+import Loader from '../../atoms/Loader/Loader';
 
 const EditNotePage: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
+    const isLoading = useSelector((state: AppState) => state.notes.loading);
+    const editNote = useSelector((state: AppState) => state.notes.currentNote);
 
     const handleFormSubmit = (formData: Record<string, string>) => {
-        //TODO: ADD SAVE ON EDIT
+        dispatch(updateNote({ id: id ? id : '', title: formData.title, description: formData.description }));
+        dispatch(clearNote());
     };
 
     useEffect(() => {
@@ -41,8 +29,19 @@ const EditNotePage: React.FC = () => {
     }, []);
 
     return (
-        <MainTemplate noFooter noHeader title="Add note">
-            <Form fields={formFields} onSubmit={handleFormSubmit} />
+        <MainTemplate noFooter noHeader title="Edit note">
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <Form
+                    fields={noteFields.map(field => ({
+                        ...field,
+                        value: editNote[field.id] ? editNote[field.id] : field.value,
+                    }))}
+                    onSubmit={handleFormSubmit}
+                    submitButtonText={'Save'}
+                />
+            )}
         </MainTemplate>
     );
 };
