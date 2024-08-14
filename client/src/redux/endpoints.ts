@@ -73,3 +73,17 @@ export const NOTES = '/notes';
  *
  */
 export const TAGS = '/tags';
+
+/**
+ * @method GET
+ * @description Zwraca kolekcje notatek na podstawie query.
+ * @param {q} - wyszukiwana fraza.
+ * @returns
+ * * Obiekt JSON z polami:
+ * {id} - id notatki
+ * {fav} - czy jest w ulubionych?
+ * {tags} - tag do kategoryzacji
+ * {...rest} - pozostałe pola
+ *
+ */
+export const SEARCH = '/search';

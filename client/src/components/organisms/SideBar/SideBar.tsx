@@ -3,6 +3,7 @@ import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import { useNavigate } from 'react-router-dom';
 import FilterPanel from '../../molecules/FilterPanel/FilterPanel';
+import SearchBar from '../../molecules/SearchBar/SearchBar';
 
 type SideBarProps = {
     isHomepage: boolean;
@@ -24,7 +25,7 @@ const SideBar: React.FC<SideBarProps> = ({ isHomepage }) => {
                         iconVariant={'add'}
                         onClick={() => navigate('add-note')}
                     />
-                    <Button buttonVariant={ButtonVariant.icon} iconVariant={'search'} />
+                    <SearchBar />
                     <FilterPanel />
                 </>
             )}

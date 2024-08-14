@@ -3,7 +3,7 @@ import React, { ComponentPropsWithoutRef } from 'react';
 type TagProps = ComponentPropsWithoutRef<'div'> & {
     label: string;
     onClick?: () => void;
-    activeFilter?: string;
+    activeFilter?: string | null;
 };
 
 const Tag = React.forwardRef<HTMLDivElement, TagProps>(({ label, onClick, activeFilter, ...rest }, ref) => {

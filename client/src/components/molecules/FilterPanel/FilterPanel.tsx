@@ -12,30 +12,28 @@ const FilterPanel: React.FC = () => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [isToggledFavorites, setIsToggledFavorites] = useState(false);
-    const [activeFilter, setActiveFilter] = useState<string>('');
+    const filter = useSelector((state: AppState) => state.notes.filter);
     const { items, loading } = useSelector((state: AppState) => state.tags) as TagsState;
 
-    const handleFilter = (filter: string) => {
-        if (activeFilter === filter) {
+    const handleFilter = (clickedFilter: string) => {
+        if (filter === clickedFilter) {
             return resetFilter();
         }
         setIsToggledFavorites(false);
-        setActiveFilter(filter);
-        dispatch(setFilter({ filter: filter }));
+        dispatch(setFilter({ filter: clickedFilter }));
     };
 
     const handleToggleFavorites = () => {
         if (isToggledFavorites) {
             return resetFilter();
         }
-        setActiveFilter('');
+
         setIsToggledFavorites(true);
         dispatch(getFavoriteNotes());
     };
 
     const resetFilter = () => {
         setIsToggledFavorites(false);
-        setActiveFilter('');
         dispatch(setFilter({ filter: '' }));
     };
 
@@ -56,7 +54,7 @@ const FilterPanel: React.FC = () => {
                                 .map((tag: string, index: number) => (
                                     <Tag
                                         key={index}
-                                        activeFilter={activeFilter}
+                                        activeFilter={filter}
                                         label={tag}
                                         onClick={() => handleFilter(tag)}
                                     />

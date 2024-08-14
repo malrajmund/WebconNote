@@ -4,4 +4,7 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 20px;
     }
+    &__header {
+        text-align: center;
+    }
 }

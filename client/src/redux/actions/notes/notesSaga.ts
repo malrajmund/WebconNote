@@ -1,13 +1,14 @@
 import { put, call, takeEvery } from 'redux-saga/effects';
 import axios, { AxiosResponse } from 'axios';
 import { Note, NotesState } from '../../reducers/notes/types';
-import { BACKEND, NOTES } from '../../endpoints';
+import { BACKEND, NOTES, SEARCH } from '../../endpoints';
 import {
     addNote,
     deleteNote,
     getFavoriteNotes,
     getNote,
     getNotes,
+    searchNotes,
     setFilter,
     setNote,
     setNotes,
@@ -120,6 +121,19 @@ export function* toggleNoteFavoriteSaga(action: PayloadAction<Note>) {
     }
 }
 
+export function* searchNotesSaga(action: PayloadAction<{ query: string }>) {
+    console.log('test');
+    const query = action.payload.query;
+
+    try {
+        const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${SEARCH}/?q=${query}`);
+        const notes: NotesState = response.data;
+        yield put(setNotes(notes));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export default function* notesSaga() {
     yield takeEvery(getNotes.type, getNotesSaga);
     yield takeEvery(addNote.type, addNoteSaga);
@@ -129,4 +143,5 @@ export default function* notesSaga() {
     yield takeEvery(setFilter.type, getNotesByFilter);
     yield takeEvery(toggleNoteFavorite.type, toggleNoteFavoriteSaga);
     yield takeEvery(getFavoriteNotes.type, getFavoriteNotesSaga);
+    yield takeEvery(searchNotes.type, searchNotesSaga);
 }
