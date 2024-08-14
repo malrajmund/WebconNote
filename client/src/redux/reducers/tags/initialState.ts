@@ -1,6 +1,6 @@
-import { InitialState } from './types';
+import { TagsState } from './types';
 
-export const initialState: InitialState = {
+export const initialState: TagsState = {
     items: null,
     loading: false,
     error: null,

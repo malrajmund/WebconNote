@@ -5,4 +5,5 @@ export const ButtonVariant: Record<ButtonVariantType, ButtonVariantType> = {
     dark: 'dark',
     icon: 'icon',
     note: 'note',
+    'note-fav': 'note-fav',
 };

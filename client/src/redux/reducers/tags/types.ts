@@ -1,4 +1,4 @@
-export interface InitialState {
+export interface TagsState {
     items: string[] | null;
     loading: boolean;
     error: any;

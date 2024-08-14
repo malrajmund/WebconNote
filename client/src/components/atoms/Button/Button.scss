@@ -16,8 +16,10 @@
         }
     }
     &--dark {
+        border-radius: $border-radius;
         background-color: $color-black;
         color: $color-white;
+        border: 1px solid $color-black;
     }
     &--icon {
         background-color: $color-black;
@@ -39,6 +41,18 @@
         transition: 0.6s ease color;
         &:hover {
             color: $color-black;
+        }
+        > svg {
+            height: 16px;
+            width: 16px;
+        }
+    }
+    &--note-fav {
+        background-color: transparent;
+        color: $color-black;
+        transition: 0.6s ease color;
+        &:hover {
+            color: $color-low-transparent;
         }
         > svg {
             height: 16px;

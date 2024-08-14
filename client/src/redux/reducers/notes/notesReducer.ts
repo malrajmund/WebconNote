@@ -12,6 +12,11 @@ export const notesSlice = createSlice({
             loading: true,
             error: null,
         }),
+        getFavoriteNotes: state => ({
+            ...state,
+            loading: true,
+            error: null,
+        }),
         setNotes: (state, action: PayloadAction<NotesState>) => ({
             ...state,
             loading: false,
@@ -52,10 +57,25 @@ export const notesSlice = createSlice({
             ...state,
             filter: action.payload.filter,
         }),
+        toggleNoteFavorite: (state, _action: PayloadAction<Pick<Note, 'id' | 'fav'>>) => ({
+            ...state,
+            loading: true,
+        }),
     },
 });
 
-export const { setNotes, getNotes, addNote, deleteNote, getNote, setNote, updateNote, clearNote, setFilter } =
-    notesSlice.actions;
+export const {
+    setNotes,
+    getNotes,
+    addNote,
+    deleteNote,
+    getNote,
+    setNote,
+    updateNote,
+    clearNote,
+    setFilter,
+    toggleNoteFavorite,
+    getFavoriteNotes,
+} = notesSlice.actions;
 
 export default notesSlice.reducer;

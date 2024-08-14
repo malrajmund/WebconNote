@@ -4,7 +4,7 @@ import { NoteVariantType } from './NoteListItem.types';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import { useNavigate } from 'react-router-dom';
-import { deleteNote, setNote } from '../../../redux/reducers/notes/notesReducer';
+import { deleteNote, setNote, toggleNoteFavorite } from '../../../redux/reducers/notes/notesReducer';
 import { useDispatch } from 'react-redux';
 import Modal from '../../organisms/Modal/Modal';
 import Tag from '../../atoms/Tag/Tag';
@@ -26,6 +26,10 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const handleToggleFavorityNote = () => {
+        dispatch(toggleNoteFavorite({ id: id, fav: fav !== 'true' }));
+    };
 
     const handleEditNoteThroughModal = () => {
         dispatch(
@@ -56,6 +60,11 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                 <h2 className="note__title" onClick={() => handleEdit(id)}>
                     {title}
                 </h2>
+                <Button
+                    buttonVariant={ButtonVariant.note}
+                    iconVariant="delete"
+                    onClick={event => handleDelete(event, id)}
+                />
                 <Modal
                     id={id}
                     title="Edit note"
@@ -65,9 +74,9 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                     <EditNoteModal />
                 </Modal>
                 <Button
-                    buttonVariant={ButtonVariant.note}
-                    iconVariant="delete"
-                    onClick={event => handleDelete(event, id)}
+                    onClick={() => handleToggleFavorityNote()}
+                    buttonVariant={fav === 'true' ? ButtonVariant['note-fav'] : ButtonVariant.note}
+                    iconVariant="star"
                 />
             </div>
             <p className="note__description">{description}</p>

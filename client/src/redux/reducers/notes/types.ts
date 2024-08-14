@@ -2,7 +2,7 @@ import { NoteVariantType } from '../../../components/molecules/NoteListItem/Note
 
 export interface Note {
     id: string;
-    fav: boolean;
+    fav: boolean | string;
     tags: string;
     variant: NoteVariantType;
     created_at: string;

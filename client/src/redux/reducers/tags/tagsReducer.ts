@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-import { InitialState } from './types';
+import { TagsState } from './types';
 import { Note } from '../notes/types';
 
 export const tagsSlice = createSlice({
@@ -12,7 +12,7 @@ export const tagsSlice = createSlice({
             loading: true,
             error: null,
         }),
-        setTags: (state, action: PayloadAction<Pick<InitialState, 'items'>>) => ({
+        setTags: (state, action: PayloadAction<Pick<TagsState, 'items'>>) => ({
             ...state,
             loading: false,
             items: action.payload.items,

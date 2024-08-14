@@ -5,11 +5,13 @@ import { BACKEND, NOTES } from '../../endpoints';
 import {
     addNote,
     deleteNote,
+    getFavoriteNotes,
     getNote,
     getNotes,
     setFilter,
     setNote,
     setNotes,
+    toggleNoteFavorite,
     updateNote,
 } from '../../reducers/notes/notesReducer';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -20,6 +22,16 @@ type GetNotesResponse = AxiosResponse<NotesState>;
 export function* getNotesSaga() {
     try {
         const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}`);
+        const notes: NotesState = response.data;
+        yield put(setNotes(notes));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* getFavoriteNotesSaga() {
+    try {
+        const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}/favourites`);
         const notes: NotesState = response.data;
         yield put(setNotes(notes));
     } catch (error) {
@@ -67,7 +79,6 @@ export function* addNoteSaga(action: PayloadAction<Note>) {
 
     try {
         yield call(axios.post, `${BACKEND}${NOTES}`, requestBody);
-        yield call(axios.get, `${BACKEND}${NOTES}`);
         yield call(getNotesSaga);
     } catch (error) {
         console.log(error);
@@ -78,7 +89,6 @@ export function* deleteNoteSaga(action: PayloadAction<Note>) {
     const id = action.payload.id;
     try {
         yield call(axios.delete, `${BACKEND}${NOTES}/${id}`);
-        yield call(axios.get, `${BACKEND}${NOTES}`);
         yield call(getNotesSaga);
     } catch (error) {
         console.log(error);
@@ -93,7 +103,19 @@ export function* updateNoteSaga(action: PayloadAction<Note>) {
     };
     try {
         yield call(axios.put, `${BACKEND}${NOTES}/${id}`, requestBody);
-        yield call(axios.get, `${BACKEND}${NOTES}`);
+        yield call(getNotesSaga);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* toggleNoteFavoriteSaga(action: PayloadAction<Note>) {
+    const id = action.payload.id;
+    const requestBody = {
+        fav: action.payload.fav.toString(),
+    };
+    try {
+        yield call(axios.put, `${BACKEND}${NOTES}/${id}`, requestBody);
         yield call(getNotesSaga);
     } catch (error) {
         console.log(error);
@@ -107,4 +129,6 @@ export default function* notesSaga() {
     yield takeEvery(getNote.type, getNoteById);
     yield takeEvery(updateNote.type, updateNoteSaga);
     yield takeEvery(setFilter.type, getNotesByFilter);
+    yield takeEvery(toggleNoteFavorite.type, toggleNoteFavoriteSaga);
+    yield takeEvery(getFavoriteNotes.type, getFavoriteNotesSaga);
 }

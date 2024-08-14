@@ -1,4 +1,4 @@
-import { FaPlus, FaTrash, FaEdit, FaArrowLeft, FaFilter, FaSearch } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaEdit, FaArrowLeft, FaFilter, FaSearch, FaStar } from 'react-icons/fa';
 import { IconVariant } from './Icon.types';
 
 export const IconMap: Record<IconVariant, React.ReactNode> = {
@@ -8,4 +8,5 @@ export const IconMap: Record<IconVariant, React.ReactNode> = {
     back: <FaArrowLeft />,
     filter: <FaFilter />,
     search: <FaSearch />,
+    star: <FaStar />,
 };
