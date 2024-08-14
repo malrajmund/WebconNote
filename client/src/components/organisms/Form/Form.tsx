@@ -17,9 +17,10 @@ interface FormProps {
     onSubmit: (formData: Record<string, string>) => void;
     submitButtonText: string;
     inModal?: boolean;
+    handleDelete?: () => void;
 }
 
-const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal = false }) => {
+const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal = false, handleDelete }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
@@ -54,7 +55,12 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal
                 />
             ))}
             <div className="form__button-wrapper">
-                <Button type="submit" buttonVariant={ButtonVariant.light} onClick={handleSubmit}>
+                {handleDelete && (
+                    <Button type="button" onClick={handleDelete} buttonVariant={ButtonVariant.light}>
+                        Delete
+                    </Button>
+                )}
+                <Button type="submit" buttonVariant={ButtonVariant.dark}>
                     {submitButtonText}
                 </Button>
             </div>

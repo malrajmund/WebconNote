@@ -47,9 +47,7 @@ export function* getNotesByFilter(action: PayloadAction<Pick<InitialState, 'filt
             const notes: NotesState = response.data;
             yield put(setNotes(notes));
         } else {
-            const response: GetNotesResponse = yield call(axios.get, `${BACKEND}${NOTES}`);
-            const notes: NotesState = response.data;
-            yield put(setNotes(notes));
+            yield call(getNotesSaga);
         }
     } catch (error) {
         console.log(error);

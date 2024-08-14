@@ -9,7 +9,8 @@ import { useDispatch } from 'react-redux';
 import Modal from '../../organisms/Modal/Modal';
 import Tag from '../../atoms/Tag/Tag';
 import EditNoteModal from '../../organisms/Modal/Variant/EditNoteModal/EditNoteModal';
-import AddTagModal from '../../organisms/Modal/Variant/AddTagModal/AddTagModal';
+import ManageTagModal from '../../organisms/Modal/Variant/ManageTagModal/ManageTagModal';
+import { clearTag, setTag } from '../../../redux/reducers/tags/tagsReducer';
 
 type NoteProps = ComponentPropsWithoutRef<'li'> & {
     variant: NoteVariantType;
@@ -29,6 +30,21 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
 
     const handleToggleFavorityNote = () => {
         dispatch(toggleNoteFavorite({ id: id, fav: fav !== 'true' }));
+    };
+
+    const handleEditTagThroughModal = (tag: string) => {
+        dispatch(
+            setNote({
+                title: title,
+                description: description,
+                variant: variant,
+                id: id,
+                created_at: created_at,
+                tags: tags,
+                fav: fav,
+            })
+        );
+        dispatch(setTag({ currentTag: tag }));
     };
 
     const handleEditNoteThroughModal = () => {
@@ -89,10 +105,24 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                         onOpen={handleEditNoteThroughModal}
                         trigger={<Button buttonVariant={ButtonVariant.note} iconVariant="add" />}
                         noHeight
+                        onClose={() => dispatch(clearTag())}
                     >
-                        <AddTagModal />
+                        <ManageTagModal />
                     </Modal>
-                    {tags && tags.split(',').map((tag, index) => <Tag key={index} label={tag} />)}
+                    {tags &&
+                        tags.split(',').map((tag, index) => (
+                            <Modal
+                                id={id}
+                                key={index}
+                                title="Edit tag"
+                                onOpen={() => handleEditTagThroughModal(tag)}
+                                trigger={<Tag key={index} label={tag} />}
+                                noHeight
+                                onClose={() => dispatch(clearTag())}
+                            >
+                                <ManageTagModal />
+                            </Modal>
+                        ))}
                 </div>
             </div>
         </li>

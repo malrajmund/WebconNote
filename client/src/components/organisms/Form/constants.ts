@@ -17,10 +17,10 @@ export const noteFields = [
 
 export const tagFields = [
     {
-        id: 'tags',
-        label: 'Tags',
+        id: 'tag',
+        label: 'Tag',
         type: 'text',
-        placeholder: 'Enter your tags (seperated by ",")',
+        placeholder: 'Enter your tag',
         value: '',
     },
 ];

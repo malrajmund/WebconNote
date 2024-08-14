@@ -16,18 +16,24 @@ const FilterPanel: React.FC = () => {
     const { items, loading } = useSelector((state: AppState) => state.tags) as TagsState;
 
     const handleFilter = (filter: string) => {
+        if (activeFilter === filter) {
+            return resetFilter();
+        }
         setIsToggledFavorites(false);
         setActiveFilter(filter);
         dispatch(setFilter({ filter: filter }));
     };
 
     const handleToggleFavorites = () => {
+        if (isToggledFavorites) {
+            return resetFilter();
+        }
         setActiveFilter('');
         setIsToggledFavorites(true);
         dispatch(getFavoriteNotes());
     };
 
-    const handleResetFilter = () => {
+    const resetFilter = () => {
         setIsToggledFavorites(false);
         setActiveFilter('');
         dispatch(setFilter({ filter: '' }));
@@ -47,18 +53,21 @@ const FilterPanel: React.FC = () => {
                             items &&
                             items
                                 .filter(tag => tag !== '')
-                                .map((tag: string) => (
-                                    <Tag activeFilter={activeFilter} label={tag} onClick={() => handleFilter(tag)} />
+                                .map((tag: string, index: number) => (
+                                    <Tag
+                                        key={index}
+                                        activeFilter={activeFilter}
+                                        label={tag}
+                                        onClick={() => handleFilter(tag)}
+                                    />
                                 ))}
                     </div>
                     <Button
                         buttonVariant={isToggledFavorites ? ButtonVariant.light : ButtonVariant.dark}
                         onClick={() => handleToggleFavorites()}
+                        iconVariant="star"
                     >
                         Favorites
-                    </Button>
-                    <Button buttonVariant={ButtonVariant.light} onClick={() => handleResetFilter()}>
-                        Reset
                     </Button>
                 </>
             )}
