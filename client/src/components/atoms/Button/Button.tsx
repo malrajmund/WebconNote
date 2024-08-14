@@ -3,7 +3,7 @@ import { ButtonVariantType } from './Button.types';
 import Icon from '../Icon/Icon';
 import { IconVariant } from '../Icon/Icon.types';
 
-type ButtonProps = ComponentPropsWithoutRef<'button'> & {
+export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     iconVariant?: IconVariant;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     buttonVariant: ButtonVariantType;
@@ -20,7 +20,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
             >
                 {iconVariant && <Icon variant={iconVariant} />}
-                {children && buttonVariant !== 'icon' && buttonVariant !== 'note' && children}
+                {children &&
+                    buttonVariant !== 'icon' &&
+                    buttonVariant !== 'note' &&
+                    buttonVariant !== 'note-fav' &&
+                    children}
             </button>
         );
     }
