@@ -53,7 +53,7 @@ const FilterPanel: React.FC = () => {
                                 .filter(tag => tag !== '')
                                 .map((tag: string, index: number) => (
                                     <Tag
-                                        key={index}
+                                        key={index} //uzyc ID
                                         activeFilter={filter}
                                         label={tag}
                                         onClick={() => handleFilter(tag)}
@@ -61,7 +61,7 @@ const FilterPanel: React.FC = () => {
                                 ))}
                     </div>
                     <Button
-                        buttonVariant={isToggledFavorites ? ButtonVariant.light : ButtonVariant.dark}
+                        buttonVariant={isToggledFavorites ? ButtonVariant.light : ButtonVariant.dark} // Utworzyc zmienne dla takich warunków powyżej JSX
                         onClick={() => handleToggleFavorites()}
                         iconVariant="star"
                     >

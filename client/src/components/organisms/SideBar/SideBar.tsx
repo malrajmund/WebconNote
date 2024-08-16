@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import { useNavigate } from 'react-router-dom';
@@ -9,28 +9,28 @@ type SideBarProps = {
     isHomepage: boolean;
 };
 
-const SideBar: React.FC<SideBarProps> = ({ isHomepage }) => {
+const SideBar: React.FC<SideBarProps> = React.memo(({ isHomepage }) => {
     const navigate = useNavigate();
+    const handleAddNoteClick = useCallback(() => navigate('add-note'), [navigate]);
+    const handleBackClick = useCallback(() => navigate('/'), [navigate]);
 
     return (
         <aside className="sidebar__wrapper">
             <h1 className="sidebar__title">WebconNote</h1>
+
             {!isHomepage && (
-                <Button buttonVariant={ButtonVariant.icon} iconVariant={'back'} onClick={() => navigate('/')} />
+                <Button buttonVariant={ButtonVariant.icon} iconVariant={'back'} onClick={handleBackClick} />
             )}
+
             {isHomepage && (
                 <>
-                    <Button
-                        buttonVariant={ButtonVariant.icon}
-                        iconVariant={'add'}
-                        onClick={() => navigate('add-note')}
-                    />
+                    <Button buttonVariant={ButtonVariant.icon} iconVariant={'add'} onClick={handleAddNoteClick} />
                     <SearchBar />
                     <FilterPanel />
                 </>
             )}
         </aside>
     );
-};
+});
 
 export default SideBar;

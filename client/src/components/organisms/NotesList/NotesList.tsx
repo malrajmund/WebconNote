@@ -2,8 +2,6 @@ import React, { ComponentPropsWithoutRef } from 'react';
 import { Note, NotesState } from '../../../redux/reducers/notes/types';
 import NoteListItem from '../../molecules/NoteListItem/NoteListItem';
 import { NoteVariant } from '../../molecules/NoteListItem/constants';
-import Button from '../../atoms/Button/Button';
-import { ButtonVariant } from '../../atoms/Button/constants';
 
 type NoteListProps = ComponentPropsWithoutRef<'ul'> & {
     notes: NotesState;

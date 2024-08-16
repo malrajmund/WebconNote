@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, useCallback } from 'react';
 import { Note } from '../../../redux/reducers/notes/types';
 import { NoteVariantType } from './NoteListItem.types';
 import Button from '../../atoms/Button/Button';
@@ -28,24 +28,26 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleToggleFavorityNote = () => {
+    const handleToggleFavorityNote = useCallback(() => {
         dispatch(toggleNoteFavorite({ id: id, fav: fav !== 'true' }));
-    };
+    }, [fav, id]);
 
-    const handleEditTagThroughModal = (tag: string) => {
-        dispatch(
-            setNote({
-                title: title,
-                description: description,
-                variant: variant,
-                id: id,
-                created_at: created_at,
-                tags: tags,
-                fav: fav,
-            })
-        );
-        dispatch(setTag({ currentTag: tag }));
-    };
+    const handleEditTagThroughModal = useCallback((tag: string) => {
+        return () => {
+            dispatch(
+                setNote({
+                    title: title,
+                    description: description,
+                    variant: variant,
+                    id: id,
+                    created_at: created_at,
+                    tags: tags,
+                    fav: fav,
+                })
+            );
+            dispatch(setTag({ currentTag: tag }));
+        };
+    }, []);
 
     const handleEditNoteThroughModal = () => {
         dispatch(
@@ -61,26 +63,24 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
         );
     };
 
-    const handleEdit = (id: string): void => {
-        navigate(`edit-note/${id}`);
-    };
+    const handleDelete = useCallback(
+        (id: string) => {
+            return () => dispatch(deleteNote({ id: id }));
+        },
+        [dispatch]
+    );
 
-    const handleDelete = (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
-        event.stopPropagation();
-        dispatch(deleteNote({ id: id }));
-    };
+    const handleEdit = useCallback((id: string) => {
+        return () => navigate(`edit-note/${id}`);
+    }, []);
 
     return (
         <li className={`note note--${variant}`}>
             <div className="note__header">
-                <h2 className="note__title" onClick={() => handleEdit(id)}>
+                <h2 className="note__title" onClick={handleEdit(id)}>
                     {title}
                 </h2>
-                <Button
-                    buttonVariant={ButtonVariant.note}
-                    iconVariant="delete"
-                    onClick={event => handleDelete(event, id)}
-                />
+                <Button buttonVariant={ButtonVariant.note} iconVariant="delete" onClick={handleDelete(id)} />
                 <Modal
                     id={id}
                     title="Edit note"
@@ -115,7 +115,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                                 id={id}
                                 key={index}
                                 title="Edit tag"
-                                onOpen={() => handleEditTagThroughModal(tag)}
+                                onOpen={handleEditTagThroughModal(tag)}
                                 trigger={<Tag key={index} label={tag} />}
                                 noHeight
                                 onClose={() => dispatch(clearTag())}

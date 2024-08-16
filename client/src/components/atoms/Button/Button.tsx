@@ -10,24 +10,26 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     isAbsolute?: boolean;
 };
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ children, buttonVariant, onClick, iconVariant, type = 'button', isAbsolute }, ref) => {
-        return (
-            <button
-                ref={ref}
-                type={type}
-                onClick={onClick && onClick}
-                className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
-            >
-                {iconVariant && <Icon variant={iconVariant} />}
-                {children &&
-                    buttonVariant !== 'icon' &&
-                    buttonVariant !== 'note' &&
-                    buttonVariant !== 'note-fav' &&
-                    children}
-            </button>
-        );
-    }
+const Button = React.memo(
+    React.forwardRef<HTMLButtonElement, ButtonProps>(
+        ({ children, buttonVariant, onClick, iconVariant, type = 'button', isAbsolute }, ref) => {
+            return (
+                <button
+                    ref={ref}
+                    type={type}
+                    onClick={onClick && onClick}
+                    className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
+                >
+                    {iconVariant && <Icon variant={iconVariant} />}
+                    {children &&
+                        buttonVariant !== 'icon' &&
+                        buttonVariant !== 'note' &&
+                        buttonVariant !== 'note-fav' &&
+                        children}
+                </button>
+            );
+        }
+    )
 );
 
 export default Button;

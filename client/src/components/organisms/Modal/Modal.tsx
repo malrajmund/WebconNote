@@ -1,5 +1,5 @@
 import Popup from 'reactjs-popup';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 
@@ -17,6 +17,11 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeigh
     const [isOpen, setIsOpen] = useState(false);
     const childWithProps = React.cloneElement(children, { setIsOpen, isOpen });
 
+    const handleOnOpen = useCallback(() => {
+        onOpen && onOpen();
+        setIsOpen(true);
+    }, [onOpen]);
+
     return (
         <Popup
             open={isOpen}
@@ -25,10 +30,7 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeigh
             closeOnEscape
             closeOnDocumentClick
             nested
-            onOpen={() => {
-                onOpen && onOpen();
-                setIsOpen(true);
-            }}
+            onOpen={handleOnOpen}
             onClose={() => {
                 onClose && onClose();
                 setIsOpen(false);

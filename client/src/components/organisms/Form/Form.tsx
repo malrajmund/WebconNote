@@ -21,6 +21,7 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal = false, handleDelete }) => {
+    // default propsy na poczatek
     const navigate = useNavigate();
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
@@ -41,6 +42,8 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal
         setFormData(newFields);
     }, [fields]);
 
+    //inModal - mowimy komponentowi co ma sie stac nie bezposrednio
+    //className mylący - biblioteka clsx
     return (
         <form className={`form__wrapper${inModal ? '--modal' : ''}`} onSubmit={handleSubmit}>
             {fields.map(field => (

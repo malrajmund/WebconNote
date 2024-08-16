@@ -1,7 +1,7 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ChangeEventHandler, ComponentPropsWithoutRef } from 'react';
 
 export type InputProps = ComponentPropsWithoutRef<'input'> & {
-    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChange: ChangeEventHandler<HTMLInputElement> | ChangeEventHandler<HTMLTextAreaElement>;
     onBlur?: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({ onChange, value, type, placeholder, class
     ) : (
         <textarea
             id={id}
-            onChange={onChange}
+            onChange={onChange as ChangeEventHandler<HTMLTextAreaElement>}
             value={value}
             placeholder={placeholder}
             className={className}

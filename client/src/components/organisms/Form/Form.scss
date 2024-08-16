@@ -1,7 +1,7 @@
 .form {
     &__wrapper {
         border: 1px solid $color-gray;
-        padding: 30px;
+        padding: 30px; //atrybuty w px na samą góre pliku
         border-radius: $border-radius;
         max-width: 600px;
         margin: 0 auto;
@@ -21,3 +21,4 @@
         gap: 5px;
     }
 }
+//roznica padding na strony a padding block start //margin

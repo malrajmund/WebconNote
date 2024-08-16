@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
     }, []);
 
     return (
-        <MainTemplate noHeader noFooter isHomepage title="Homepage">
+        <MainTemplate isHomepage title="Homepage">
             {isLoading ? <Loader /> : <NotesList notes={notes} />}
         </MainTemplate>
     );
