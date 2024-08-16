@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "frontend": "npm run dev --prefix client",
-    "backend": "npm start --prefix backend",
+    "api": "npm start --prefix api",
     "storybook": "npm run storybook --prefix client",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run storybook\""
+    "dev": "concurrently \"npm run api\" \"npm run frontend\" \"npm run storybook\""
   },
   "keywords": [],
   "author": "",
