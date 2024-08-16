@@ -2,11 +2,35 @@
   "notes": [
     {
       "fav": false,
-      "tags": "",
-      "title": "Test",
-      "description": "test",
+      "tags": "first",
+      "title": "1",
+      "description": "1",
       "created_at": "16.08.2024",
       "id": "p4J-nBAhm"
+    },
+    {
+      "fav": "true",
+      "tags": "second",
+      "title": "2",
+      "description": "2",
+      "created_at": "16.08.2024",
+      "id": "B9APFO31e"
+    },
+    {
+      "fav": "true",
+      "tags": "first",
+      "title": "3",
+      "description": "3",
+      "created_at": "16.08.2024",
+      "id": "WQ7rWZE_z"
+    },
+    {
+      "fav": false,
+      "tags": "second",
+      "title": "4",
+      "description": "4",
+      "created_at": "16.08.2024",
+      "id": "F7Dgrcd0a"
     }
   ]
 }

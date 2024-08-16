@@ -122,7 +122,6 @@ export function* toggleNoteFavoriteSaga(action: PayloadAction<Note>) {
 }
 
 export function* searchNotesSaga(action: PayloadAction<{ query: string }>) {
-    console.log('test');
     const query = action.payload.query;
 
     try {

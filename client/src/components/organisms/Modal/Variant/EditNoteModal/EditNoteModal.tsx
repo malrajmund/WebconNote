@@ -31,7 +31,6 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ setIsOpen, isOpen }) => {
                 ...field,
                 value: editNote[field.id] ? editNote[field.id] : field.value,
             }));
-            console.log(newFields);
             setFields([...newFields]);
         }
     }, [isOpen]);
