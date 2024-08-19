@@ -120,13 +120,13 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                         <ManageTagModal />
                     </Modal>
                     {tags &&
-                        tags.split(',').map((tag, index) => (
+                        tags.split(',').map(tag => (
                             <Modal
                                 id={id}
-                                key={index}
+                                key={tag}
                                 title="Edit tag"
                                 onOpen={handleEditTagThroughModal(tag)}
-                                trigger={<Tag key={index} label={tag} />}
+                                trigger={<Tag label={tag} />}
                                 noHeight
                                 onClose={handleClearTag}
                             >
