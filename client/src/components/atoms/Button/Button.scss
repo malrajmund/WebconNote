@@ -36,6 +36,20 @@
             color: $color-black;
         }
     }
+    &--icon-active {
+        border: 1px solid $color-black;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background-color: $color-white;
+        color: $color-black;
+        transition: 0.6s ease background-color;
+        &:hover {
+            border: 1px solid $color-white;
+            background-color: $color-black;
+            color: $color-white;
+        }
+    }
     &--note {
         background-color: transparent;
         color: $color-semi-transparent;

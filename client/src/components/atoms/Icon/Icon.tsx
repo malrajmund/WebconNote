@@ -6,7 +6,7 @@ type IconProps = ComponentPropsWithoutRef<'span'> & {
     variant: IconVariant;
 };
 
-const Icon: React.FC<IconProps> = ({ variant }) => {
+const Icon: React.FC<IconProps> = ({ variant = 'default' }) => {
     return <>{IconMap[variant]}</>;
 };
 

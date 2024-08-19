@@ -9,4 +9,5 @@ export const IconMap: Record<IconVariant, React.ReactNode> = {
     filter: <FaFilter />,
     search: <FaSearch />,
     star: <FaStar />,
+    default: null,
 };

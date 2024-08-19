@@ -6,6 +6,7 @@
         top: 7px;
         left: 50px;
         position: absolute;
+        visibility: hidden;
         &::after {
             top: 8px;
             left: -10px;
@@ -19,6 +20,13 @@
             transform: rotate(90deg);
             background-color: $color-white;
             content: ' ';
+        }
+
+        &--visible {
+            visibility: visible;
+            &::after {
+                visibility: hidden;
+            }
         }
 
         input {

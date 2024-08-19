@@ -62,6 +62,10 @@ export const notesSlice = createSlice({
             ...state,
             filter: action.payload.filter,
         }),
+        clearFilter: (state, _action: PayloadAction) => ({
+            ...state,
+            filter: initialState.filter,
+        }),
         toggleNoteFavorite: (state, _action: PayloadAction<Pick<Note, 'id' | 'fav'>>) => ({
             ...state,
             loading: true,
@@ -82,6 +86,7 @@ export const {
     toggleNoteFavorite,
     getFavoriteNotes,
     searchNotes,
+    clearFilter,
 } = notesSlice.actions;
 
 export default notesSlice.reducer;

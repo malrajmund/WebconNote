@@ -26,7 +26,7 @@ export const ButtonStory: StoryObj<ButtonProps> = {
     args: {
         children: 'Controllable button',
         buttonVariant: ButtonVariant.dark,
-        iconVariant: '',
+        iconVariant: 'default',
     },
 
     render: args => {
