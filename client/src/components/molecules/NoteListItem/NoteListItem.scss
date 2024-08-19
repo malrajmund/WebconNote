@@ -1,11 +1,11 @@
 .note {
-    border-radius: $border-radius;
+    height: 330px;
+    width: 350px;
     padding: 10px;
+    border-radius: $border-radius;
     background-color: $color-primary;
     display: flex;
     flex-direction: column;
-    height: 330px;
-    width: 350px;
 
     &__header {
         display: flex;
@@ -15,9 +15,9 @@
     }
 
     &__title {
-        cursor: pointer;
-        font-weight: 500;
         font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
         color: $color-black;
         transition: 0.3s ease color;
         &:hover {
@@ -27,19 +27,19 @@
 
     &__description {
         font-size: 20px;
-        font-weight: bold;
         padding: 5px 0px;
         margin: 10px 0px;
         flex: 1;
+        font-weight: bold;
         text-overflow: ellipsis;
         overflow-y: auto;
         white-space: pre-line;
     }
 
     &__date {
-        margin-top: auto;
         font-size: 12px;
         font-weight: 100;
+        margin-top: auto;
     }
 
     &__footer {
@@ -47,14 +47,14 @@
     }
 
     &__tags-wrapper {
+        max-height: 50px;
+        max-height: 50px;
         display: flex;
         justify-content: end;
         align-items: center;
         flex: 0.75;
         flex-wrap: wrap;
-        gap: 5px;
         margin-left: auto;
-        max-height: 50px;
         overflow-y: auto;
     }
 

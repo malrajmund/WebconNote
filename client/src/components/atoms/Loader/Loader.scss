@@ -1,14 +1,14 @@
 .loader {
     &__wrapper {
-        position: absolute;
         left: 50%;
         top: 50%;
+        position: absolute;
         transform: translate(-50%, -50%);
     }
     &__main {
         width: 50px;
-        aspect-ratio: 1;
         border-radius: 50%;
+        aspect-ratio: 1;
         border: 8px solid;
         border-color: #000 #0000;
         animation: l1 1s infinite;

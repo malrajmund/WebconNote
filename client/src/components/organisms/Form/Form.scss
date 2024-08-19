@@ -1,24 +1,23 @@
 .form {
     &__wrapper {
         border: 1px solid $color-gray;
-        padding: 30px; //atrybuty w px na samą góre pliku
-        border-radius: $border-radius;
+        padding: 30px;
         max-width: 600px;
         margin: 0 auto;
+        border-radius: $border-radius;
         &--modal {
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             border: none;
-            height: 100%;
         }
     }
     &__button-wrapper {
+        gap: 5px;
         margin-top: auto;
         margin-left: auto;
         width: min-content;
         display: flex;
-        gap: 5px;
     }
 }
-//roznica padding na strony a padding block start //margin

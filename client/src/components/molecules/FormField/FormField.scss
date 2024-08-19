@@ -1,17 +1,17 @@
 .form-field {
     margin-bottom: 16px;
     &__label {
-        display: block;
         font-size: 14px;
-        font-weight: bold;
         margin-bottom: 8px;
+        display: block;
+        font-weight: bold;
     }
 
     &__input {
-        width: 100%;
+        border: 1px solid #ccc;
         padding: 8px;
         font-size: 16px;
-        border: 1px solid #ccc;
+        width: 100%;
         border-radius: $border-radius;
         resize: none;
     }

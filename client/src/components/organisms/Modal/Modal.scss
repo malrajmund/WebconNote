@@ -1,9 +1,9 @@
 .popup {
     &-content {
+        padding: 25px;
+        width: 30%;
         margin: auto;
         background: $color-white;
-        width: 30%;
-        padding: 25px;
         border-radius: $border-radius;
         position: relative;
     }
@@ -11,9 +11,9 @@
         background: $color-low-transparent;
     }
     &-header {
-        text-align: center;
         font-size: 24px;
         margin-bottom: 30px;
+        text-align: center;
     }
     &-body {
         height: 300px;
