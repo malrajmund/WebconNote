@@ -2,6 +2,7 @@ import React, { ComponentPropsWithoutRef } from 'react';
 import { ButtonVariantType } from './Button.types';
 import Icon from '../Icon/Icon';
 import { IconVariant } from '../Icon/Icon.types';
+import clsx from 'clsx';
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     iconVariant?: IconVariant;
@@ -12,7 +13,7 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 
 const Button = React.memo(
     React.forwardRef<HTMLButtonElement, ButtonProps>(
-        ({ children, buttonVariant, onClick, iconVariant, type = 'button', isAbsolute }, ref) => {
+        ({ type = 'button', children, buttonVariant, onClick, iconVariant, isAbsolute }, ref) => {
             const isVisibleChildren =
                 children && buttonVariant !== 'icon' && buttonVariant !== 'note' && buttonVariant !== 'note-fav';
             return (
@@ -20,7 +21,7 @@ const Button = React.memo(
                     ref={ref}
                     type={type}
                     onClick={onClick && onClick}
-                    className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
+                    className={clsx('button', `button--${buttonVariant}`, { 'button--absolute': isAbsolute })}
                 >
                     {iconVariant && <Icon variant={iconVariant} />}
                     {isVisibleChildren && children}

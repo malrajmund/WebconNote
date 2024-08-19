@@ -11,6 +11,7 @@ import Tag from '../../atoms/Tag/Tag';
 import EditNoteModal from '../../organisms/Modal/Variant/EditNoteModal/EditNoteModal';
 import ManageTagModal from '../../organisms/Modal/Variant/ManageTagModal/ManageTagModal';
 import { clearTag, setTag } from '../../../redux/reducers/tags/tagsReducer';
+import clsx from 'clsx';
 
 type NoteProps = ComponentPropsWithoutRef<'li'> & {
     variant: NoteVariantType;
@@ -86,7 +87,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
     }, []);
 
     return (
-        <li className={`note note--${variant}`}>
+        <li className={clsx('note', `note--${variant}`)}>
             <div className="note__header">
                 <h2 className="note__title" onClick={handleEdit(id)}>
                     {title}

@@ -3,6 +3,7 @@ import FormField from '../../molecules/FormField/FormField';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
 
 export interface FormFieldConfig {
     id: string;
@@ -47,8 +48,9 @@ const Form: React.FC<FormProps> = ({ inModal = false, fields, onSubmit, submitBu
 
     //inModal - mowimy komponentowi co ma sie stac nie bezposrednio
     //className mylący - biblioteka clsx
+
     return (
-        <form className={`form__wrapper${inModal ? '--modal' : ''}`} onSubmit={handleSubmit}>
+        <form className={clsx('form__wrapper', { 'form__wrapper--modal': inModal })} onSubmit={handleSubmit}>
             {fields.map(field => (
                 <FormField
                     key={field.id}

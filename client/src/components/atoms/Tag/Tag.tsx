@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { ComponentPropsWithoutRef } from 'react';
 
 type TagProps = ComponentPropsWithoutRef<'div'> & {
@@ -10,7 +11,11 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(({ label, onClick, active
     return (
         <div
             ref={ref}
-            className={`tag__wrapper ${onClick ? 'tag__wrapper--clickable' : ''} ${activeFilter === label ? 'tag__wrapper--active' : ''}`}
+            className={clsx(
+                'tag__wrapper',
+                { 'tag__wrapper--clickable': onClick },
+                { 'tag__wrapper--active': activeFilter === label }
+            )}
             onClick={onClick}
             {...rest}
         >

@@ -2,6 +2,7 @@ import Popup from 'reactjs-popup';
 import React, { useCallback, useState } from 'react';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
+import clsx from 'clsx';
 
 type ModalProps = {
     trigger: React.ReactNode;
@@ -46,7 +47,7 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeigh
                 isAbsolute
             />
             <h2 className="popup-header">{title}</h2>
-            <div className={`popup-body ${noHeight ? 'popup-body--no-height' : ''}`}>{childWithProps}</div>
+            <div className={clsx('popup-body', { 'popup-body--no-height': noHeight })}>{childWithProps}</div>
         </Popup>
     );
 };

@@ -7,7 +7,7 @@ interface MainTemplateProps {
     title: string;
 }
 
-const MainTemplate: React.FC<MainTemplateProps> = ({ children, isHomepage = false, title }) => {
+const MainTemplate: React.FC<MainTemplateProps> = ({ isHomepage = false, children, title }) => {
     return (
         <>
             <SideBar isHomepage={isHomepage} />
