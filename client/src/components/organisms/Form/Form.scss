@@ -5,15 +5,24 @@
         max-width: 600px;
         margin: 0 auto;
         border-radius: $border-radius;
-        &--modal {
-            padding: 0px;
+        &--height-100 {
             height: 100%;
+        }
+        &--column {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+        }
+
+        &--no-border {
             border: none;
         }
+
+        &--no-padding {
+            padding: 0px;
+        }
     }
+
     &__button-wrapper {
         gap: 5px;
         margin-top: auto;

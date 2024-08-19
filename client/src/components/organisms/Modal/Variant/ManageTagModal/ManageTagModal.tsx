@@ -54,7 +54,10 @@ const ManageTagModal: React.FC<ManageTagModalProps> = ({ setIsOpen, isOpen }) =>
                 fields={fields}
                 onSubmit={handleFormSubmit}
                 submitButtonText={currentTag ? 'Save' : 'Add'}
-                inModal
+                noBorder
+                flexColumn
+                heightFull
+                noPadding
             />
         </>
     );

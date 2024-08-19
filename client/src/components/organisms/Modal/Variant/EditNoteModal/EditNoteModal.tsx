@@ -38,7 +38,15 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ setIsOpen, isOpen }) => {
     return isLoading ? (
         <Loader />
     ) : (
-        <Form fields={fields} onSubmit={handleFormSubmit} submitButtonText={'Save'} inModal />
+        <Form
+            fields={fields}
+            onSubmit={handleFormSubmit}
+            submitButtonText={'Save'}
+            noBorder
+            flexColumn
+            heightFull
+            noPadding
+        />
     );
 };
 

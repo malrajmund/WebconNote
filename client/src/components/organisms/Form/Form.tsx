@@ -17,11 +17,23 @@ interface FormProps {
     fields: FormFieldConfig[];
     onSubmit: (formData: Record<string, string>) => void;
     submitButtonText: string;
-    inModal?: boolean;
+    heightFull?: boolean;
+    flexColumn?: boolean;
+    noBorder?: boolean;
+    noPadding?: boolean;
     handleDelete?: () => void;
 }
 
-const Form: React.FC<FormProps> = ({ inModal = false, fields, onSubmit, submitButtonText, handleDelete }) => {
+const Form: React.FC<FormProps> = ({
+    heightFull = false,
+    flexColumn = false,
+    noBorder = false,
+    noPadding = false,
+    fields,
+    onSubmit,
+    submitButtonText,
+    handleDelete,
+}) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
@@ -46,11 +58,17 @@ const Form: React.FC<FormProps> = ({ inModal = false, fields, onSubmit, submitBu
         setFormData(newFields);
     }, [fields]);
 
-    //inModal - mowimy komponentowi co ma sie stac nie bezposrednio
-    //className mylący - biblioteka clsx
-
     return (
-        <form className={clsx('form__wrapper', { 'form__wrapper--modal': inModal })} onSubmit={handleSubmit}>
+        <form
+            className={clsx(
+                'form__wrapper',
+                { 'form__wrapper--height-100': heightFull },
+                { 'form__wrapper--no-border': noBorder },
+                { 'form__wrapper--column': flexColumn },
+                { 'form__wrapper--no-padding': noPadding }
+            )}
+            onSubmit={handleSubmit}
+        >
             {fields.map(field => (
                 <FormField
                     key={field.id}
