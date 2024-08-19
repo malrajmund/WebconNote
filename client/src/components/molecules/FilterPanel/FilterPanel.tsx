@@ -13,6 +13,7 @@ const FilterPanel: React.FC = () => {
     const [isToggledFavorites, setIsToggledFavorites] = useState(false);
     const filter = useSelector((state: AppState) => state.notes.filter);
     const items = useSelector((state: AppState) => state.tags.items);
+    const favoritesButtonVariant = isToggledFavorites ? ButtonVariant.light : ButtonVariant.dark;
 
     const handleToggleList = () => {
         return setIsOpen(!isOpen);
@@ -62,11 +63,7 @@ const FilterPanel: React.FC = () => {
                                     <Tag key={tag} activeFilter={filter} label={tag} onClick={handleFilter(tag)} />
                                 ))}
                     </div>
-                    <Button
-                        buttonVariant={isToggledFavorites ? ButtonVariant.light : ButtonVariant.dark} // Utworzyc zmienne dla takich warunków powyżej JSX
-                        onClick={handleToggleFavorites}
-                        iconVariant="star"
-                    >
+                    <Button buttonVariant={favoritesButtonVariant} onClick={handleToggleFavorites} iconVariant="star">
                         Favorites
                     </Button>
                 </>

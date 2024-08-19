@@ -13,6 +13,8 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 const Button = React.memo(
     React.forwardRef<HTMLButtonElement, ButtonProps>(
         ({ children, buttonVariant, onClick, iconVariant, type = 'button', isAbsolute }, ref) => {
+            const isVisibleChildren =
+                children && buttonVariant !== 'icon' && buttonVariant !== 'note' && buttonVariant !== 'note-fav';
             return (
                 <button
                     ref={ref}
@@ -21,11 +23,7 @@ const Button = React.memo(
                     className={`button button--${buttonVariant} ${isAbsolute ? 'button--absolute' : ''}`}
                 >
                     {iconVariant && <Icon variant={iconVariant} />}
-                    {children &&
-                        buttonVariant !== 'icon' &&
-                        buttonVariant !== 'note' &&
-                        buttonVariant !== 'note-fav' &&
-                        children}
+                    {isVisibleChildren && children}
                 </button>
             );
         }

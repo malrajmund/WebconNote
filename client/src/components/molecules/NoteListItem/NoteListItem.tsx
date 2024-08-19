@@ -27,6 +27,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isFavorite = fav === 'true' ? ButtonVariant['note-fav'] : ButtonVariant.note;
 
     const handleToggleFavorityNote = useCallback(() => {
         dispatch(toggleNoteFavorite({ id: id, fav: fav !== 'true' }));
@@ -99,11 +100,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                 >
                     <EditNoteModal />
                 </Modal>
-                <Button
-                    onClick={handleToggleFavorityNote}
-                    buttonVariant={fav === 'true' ? ButtonVariant['note-fav'] : ButtonVariant.note}
-                    iconVariant="star"
-                />
+                <Button onClick={handleToggleFavorityNote} buttonVariant={isFavorite} iconVariant="star" />
             </div>
             <p className="note__description">{description}</p>
             <div className="note__footer">

@@ -17,11 +17,9 @@ const SideBar: React.FC<SideBarProps> = ({ isHomepage }) => {
     return (
         <aside className="sidebar__wrapper">
             <h1 className="sidebar__title">WebconNote</h1>
-
             {!isHomepage && (
                 <Button buttonVariant={ButtonVariant.icon} iconVariant={'back'} onClick={handleBackClick} />
             )}
-
             {isHomepage && (
                 <>
                     <Button buttonVariant={ButtonVariant.icon} iconVariant={'add'} onClick={handleAddNoteClick} />
