@@ -6,7 +6,11 @@
         font-size: 12px;
         padding: 2px 8px;
         border: 1px solid transparent;
-
+        overflow: hidden;
+        max-width: 75px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         &--clickable {
             cursor: pointer;
         }
