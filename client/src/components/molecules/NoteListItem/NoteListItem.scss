@@ -46,6 +46,11 @@
         display: flex;
     }
 
+    &__add {
+        align-self: self-end;
+        margin-left: auto;
+    }
+
     &__tags-wrapper {
         max-height: 50px;
         max-height: 50px;

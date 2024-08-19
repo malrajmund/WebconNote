@@ -3,7 +3,7 @@ import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import Tag from '../../atoms/Tag/Tag';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavoriteNotes, setFilter } from '../../../redux/reducers/notes/notesReducer';
+import { clearFilter, getFavoriteNotes, setFilter } from '../../../redux/reducers/notes/notesReducer';
 import { getTags } from '../../../redux/reducers/tags/tagsReducer';
 import { AppState } from '../../../redux/store';
 
@@ -35,6 +35,8 @@ const FilterPanel: React.FC = () => {
     const handleToggleFavorites = useCallback(() => {
         if (isToggledFavorites) {
             return resetFilter();
+        } else {
+            dispatch(clearFilter());
         }
 
         setIsToggledFavorites(true);

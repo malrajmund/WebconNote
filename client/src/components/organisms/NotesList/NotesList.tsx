@@ -4,7 +4,7 @@ import NoteListItem from '../../molecules/NoteListItem/NoteListItem';
 import { NoteVariant } from '../../molecules/NoteListItem/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNotes } from '../../../redux/reducers/notes/notesReducer';
-import { AppState } from '../../../redux/store';
+import { AppState, channel } from '../../../redux/store';
 import Loader from '../../atoms/Loader/Loader';
 
 const NotesList: React.FC = () => {
@@ -14,6 +14,20 @@ const NotesList: React.FC = () => {
 
     useEffect(() => {
         dispatch(getNotes());
+    }, []);
+
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data.type === 'UPDATE_NOTE') {
+                dispatch(getNotes());
+            }
+        };
+
+        channel.addEventListener('message', handleMessage);
+
+        return () => {
+            channel.removeEventListener('message', handleMessage);
+        };
     }, []);
 
     return notes && notes.length > 0 ? (

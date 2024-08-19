@@ -106,7 +106,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
             <p className="note__description">{description}</p>
             <div className="note__footer">
                 <div className="note__date">{created_at}</div>
-                <div className="note__tags-wrapper">
+                <div className="note__add">
                     <Modal
                         id={id}
                         title="Add tag"
@@ -117,6 +117,8 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                     >
                         <ManageTagModal />
                     </Modal>
+                </div>
+                <div className="note__tags-wrapper">
                     {tags &&
                         tags.split(',').map(tag => (
                             <Modal

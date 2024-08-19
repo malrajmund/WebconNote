@@ -4,6 +4,8 @@ import notesReducer from './reducers/notes/notesReducer';
 import rootSaga from './actions/rootSaga';
 import tagsReducer from './reducers/tags/tagsReducer';
 
+export const channel = new BroadcastChannel('note_channel');
+
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({

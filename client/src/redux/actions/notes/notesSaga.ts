@@ -17,6 +17,7 @@ import {
 } from '../../reducers/notes/notesReducer';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { InitialState } from '../../reducers/notes/initialState';
+import { channel } from '../../store';
 
 type GetNotesResponse = AxiosResponse<NotesState>;
 
@@ -102,6 +103,7 @@ export function* updateNoteSaga(action: PayloadAction<Note>) {
     };
     try {
         yield call(axios.put, `${BACKEND}${NOTES}/${id}`, requestBody);
+        channel.postMessage({ type: 'UPDATE_NOTE' });
         yield call(getNotesSaga);
     } catch (error) {
         console.log(error);
