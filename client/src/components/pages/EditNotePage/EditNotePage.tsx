@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import MainTemplate from '../../templates/MainTemplate/MainTemplate';
 import Form from '../../organisms/Form/Form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,10 +15,13 @@ const EditNotePage: React.FC = () => {
     const isLoading = useSelector((state: AppState) => state.notes.loading);
     const editNote = useSelector((state: AppState) => state.notes.currentNote);
 
-    const handleFormSubmit = (formData: Record<string, string>) => {
-        dispatch(updateNote({ id: id ? id : '', title: formData.title, description: formData.description }));
-        dispatch(clearNote());
-    };
+    const handleFormSubmit = useCallback(
+        (formData: Record<string, string>) => {
+            dispatch(updateNote({ id: id ? id : '', title: formData.title, description: formData.description }));
+            dispatch(clearNote());
+        },
+        [dispatch]
+    );
 
     useEffect(() => {
         if (id) {
@@ -29,7 +32,7 @@ const EditNotePage: React.FC = () => {
     }, []);
 
     return (
-        <MainTemplate noFooter noHeader title="Edit note">
+        <MainTemplate title="Edit note">
             {isLoading ? (
                 <Loader />
             ) : (

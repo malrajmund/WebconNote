@@ -20,4 +20,4 @@ const FormField: React.FC<FormFieldProps> = ({ label, id, type, value, onChange,
     );
 };
 
-export default FormField;
+export default React.memo(FormField);

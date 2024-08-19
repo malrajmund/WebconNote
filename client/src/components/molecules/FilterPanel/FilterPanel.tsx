@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import Tag from '../../atoms/Tag/Tag';
@@ -6,31 +6,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFavoriteNotes, setFilter } from '../../../redux/reducers/notes/notesReducer';
 import { getTags } from '../../../redux/reducers/tags/tagsReducer';
 import { AppState } from '../../../redux/store';
-import { TagsState } from '../../../redux/reducers/tags/types';
 
 const FilterPanel: React.FC = () => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [isToggledFavorites, setIsToggledFavorites] = useState(false);
     const filter = useSelector((state: AppState) => state.notes.filter);
-    const { items, loading } = useSelector((state: AppState) => state.tags) as TagsState;
+    const items = useSelector((state: AppState) => state.tags.items);
 
-    const handleFilter = (clickedFilter: string) => {
-        if (filter === clickedFilter) {
-            return resetFilter();
-        }
-        setIsToggledFavorites(false);
-        dispatch(setFilter({ filter: clickedFilter }));
+    const handleToggleList = () => {
+        return setIsOpen(!isOpen);
     };
 
-    const handleToggleFavorites = () => {
+    const handleFilter = useCallback(
+        (clickedFilter: string) => {
+            return () => {
+                if (filter === clickedFilter) {
+                    return resetFilter();
+                }
+                setIsToggledFavorites(false);
+                dispatch(setFilter({ filter: clickedFilter }));
+            };
+        },
+        [dispatch, filter]
+    );
+
+    const handleToggleFavorites = useCallback(() => {
         if (isToggledFavorites) {
             return resetFilter();
         }
 
         setIsToggledFavorites(true);
         dispatch(getFavoriteNotes());
-    };
+    }, [dispatch, isToggledFavorites]);
 
     const resetFilter = () => {
         setIsToggledFavorites(false);
@@ -43,26 +51,20 @@ const FilterPanel: React.FC = () => {
 
     return (
         <div className="filter-panel__wrapper">
-            <Button buttonVariant={ButtonVariant.icon} iconVariant="filter" onClick={() => setIsOpen(!isOpen)} />
+            <Button buttonVariant={ButtonVariant.icon} iconVariant="filter" onClick={handleToggleList} />
             {isOpen && (
                 <>
                     <div className="filter-panel__tags">
-                        {!loading &&
-                            items &&
+                        {items &&
                             items
                                 .filter(tag => tag !== '')
-                                .map((tag: string, index: number) => (
-                                    <Tag
-                                        key={index} //uzyc ID
-                                        activeFilter={filter}
-                                        label={tag}
-                                        onClick={() => handleFilter(tag)}
-                                    />
+                                .map((tag: string) => (
+                                    <Tag key={tag} activeFilter={filter} label={tag} onClick={handleFilter(tag)} />
                                 ))}
                     </div>
                     <Button
                         buttonVariant={isToggledFavorites ? ButtonVariant.light : ButtonVariant.dark} // Utworzyc zmienne dla takich warunków powyżej JSX
-                        onClick={() => handleToggleFavorites()}
+                        onClick={handleToggleFavorites}
                         iconVariant="star"
                     >
                         Favorites

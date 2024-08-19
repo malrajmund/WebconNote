@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import Button from '../../atoms/Button/Button';
 import Input from '../../atoms/Input/Input';

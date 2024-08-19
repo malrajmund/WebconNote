@@ -14,4 +14,4 @@ const Label: React.FC<LabelProps> = ({ label, id, className }) => {
     );
 };
 
-export default Label;
+export default React.memo(Label);

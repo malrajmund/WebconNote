@@ -9,7 +9,7 @@ type SideBarProps = {
     isHomepage: boolean;
 };
 
-const SideBar: React.FC<SideBarProps> = React.memo(({ isHomepage }) => {
+const SideBar: React.FC<SideBarProps> = ({ isHomepage }) => {
     const navigate = useNavigate();
     const handleAddNoteClick = useCallback(() => navigate('add-note'), [navigate]);
     const handleBackClick = useCallback(() => navigate('/'), [navigate]);
@@ -31,6 +31,6 @@ const SideBar: React.FC<SideBarProps> = React.memo(({ isHomepage }) => {
             )}
         </aside>
     );
-});
+};
 
-export default SideBar;
+export default React.memo(SideBar);

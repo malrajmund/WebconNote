@@ -19,4 +19,4 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(({ label, onClick, active
     );
 });
 
-export default Tag;
+export default React.memo(Tag);

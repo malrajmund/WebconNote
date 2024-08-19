@@ -17,10 +17,10 @@ type NoteProps = ComponentPropsWithoutRef<'li'> & {
 };
 
 const NoteListItem: React.FC<Note & NoteProps> = ({
+    variant = 'primary',
     tags,
     fav,
     id,
-    variant = 'primary',
     created_at,
     title,
     description,
@@ -32,24 +32,27 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
         dispatch(toggleNoteFavorite({ id: id, fav: fav !== 'true' }));
     }, [fav, id]);
 
-    const handleEditTagThroughModal = useCallback((tag: string) => {
-        return () => {
-            dispatch(
-                setNote({
-                    title: title,
-                    description: description,
-                    variant: variant,
-                    id: id,
-                    created_at: created_at,
-                    tags: tags,
-                    fav: fav,
-                })
-            );
-            dispatch(setTag({ currentTag: tag }));
-        };
-    }, []);
+    const handleEditTagThroughModal = useCallback(
+        (tag: string) => {
+            return () => {
+                dispatch(
+                    setNote({
+                        title: title,
+                        description: description,
+                        variant: variant,
+                        id: id,
+                        created_at: created_at,
+                        tags: tags,
+                        fav: fav,
+                    })
+                );
+                dispatch(setTag({ currentTag: tag }));
+            };
+        },
+        [dispatch, title, description, variant, id, created_at, tags, fav]
+    );
 
-    const handleEditNoteThroughModal = () => {
+    const handleEditNoteThroughModal = useCallback(() => {
         dispatch(
             setNote({
                 title: title,
@@ -61,7 +64,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                 fav: fav,
             })
         );
-    };
+    }, [dispatch, title, description, variant, id, created_at, tags, fav]);
 
     const handleDelete = useCallback(
         (id: string) => {
@@ -70,8 +73,15 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
         [dispatch]
     );
 
-    const handleEdit = useCallback((id: string) => {
-        return () => navigate(`edit-note/${id}`);
+    const handleEdit = useCallback(
+        (id: string) => {
+            return () => navigate(`edit-note/${id}`);
+        },
+        [id]
+    );
+
+    const handleClearTag = useCallback(() => {
+        return dispatch(clearTag());
     }, []);
 
     return (
@@ -90,7 +100,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                     <EditNoteModal />
                 </Modal>
                 <Button
-                    onClick={() => handleToggleFavorityNote()}
+                    onClick={handleToggleFavorityNote}
                     buttonVariant={fav === 'true' ? ButtonVariant['note-fav'] : ButtonVariant.note}
                     iconVariant="star"
                 />
@@ -105,7 +115,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                         onOpen={handleEditNoteThroughModal}
                         trigger={<Button buttonVariant={ButtonVariant.note} iconVariant="add" />}
                         noHeight
-                        onClose={() => dispatch(clearTag())}
+                        onClose={handleClearTag}
                     >
                         <ManageTagModal />
                     </Modal>
@@ -118,7 +128,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                                 onOpen={handleEditTagThroughModal(tag)}
                                 trigger={<Tag key={index} label={tag} />}
                                 noHeight
-                                onClose={() => dispatch(clearTag())}
+                                onClose={handleClearTag}
                             >
                                 <ManageTagModal />
                             </Modal>
@@ -129,4 +139,4 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
     );
 };
 
-export default NoteListItem;
+export default React.memo(NoteListItem);

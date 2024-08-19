@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import FormField from '../../molecules/FormField/FormField';
 import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
@@ -20,22 +20,22 @@ interface FormProps {
     handleDelete?: () => void;
 }
 
-const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal = false, handleDelete }) => {
-    // default propsy na poczatek
+const Form: React.FC<FormProps> = ({ inModal = false, fields, onSubmit, submitButtonText, handleDelete }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState<Record<string, string>>(
         fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {})
     );
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = event.target;
         setFormData(prevData => ({ ...prevData, [id]: value }));
-    };
+    }, []);
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = useCallback((event: React.FormEvent) => {
         event.preventDefault();
         onSubmit(formData);
         navigate('/');
-    };
+    }, []);
 
     useEffect(() => {
         let newFields = fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {});
@@ -71,4 +71,4 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonText, inModal
     );
 };
 
-export default Form;
+export default React.memo(Form);

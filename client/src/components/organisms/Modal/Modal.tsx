@@ -51,4 +51,4 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeigh
     );
 };
 
-export default Modal;
+export default React.memo(Modal);

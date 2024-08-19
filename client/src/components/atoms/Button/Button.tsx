@@ -5,7 +5,7 @@ import { IconVariant } from '../Icon/Icon.types';
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     iconVariant?: IconVariant;
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>, ...args: any[]) => void;
     buttonVariant: ButtonVariantType;
     isAbsolute?: boolean;
 };
