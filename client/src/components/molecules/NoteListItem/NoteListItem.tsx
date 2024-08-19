@@ -139,4 +139,4 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
     );
 };
 
-export default React.memo(NoteListItem);
+export default NoteListItem;

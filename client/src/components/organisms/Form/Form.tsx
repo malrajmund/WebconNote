@@ -31,11 +31,14 @@ const Form: React.FC<FormProps> = ({ inModal = false, fields, onSubmit, submitBu
         setFormData(prevData => ({ ...prevData, [id]: value }));
     }, []);
 
-    const handleSubmit = useCallback((event: React.FormEvent) => {
-        event.preventDefault();
-        onSubmit(formData);
-        navigate('/');
-    }, []);
+    const handleSubmit = useCallback(
+        (event: React.FormEvent) => {
+            event.preventDefault();
+            onSubmit(formData);
+            navigate('/');
+        },
+        [formData]
+    );
 
     useEffect(() => {
         let newFields = fields.reduce((acc, field) => ({ ...acc, [field.id]: field.value }), {});
@@ -71,4 +74,4 @@ const Form: React.FC<FormProps> = ({ inModal = false, fields, onSubmit, submitBu
     );
 };
 
-export default React.memo(Form);
+export default Form;
