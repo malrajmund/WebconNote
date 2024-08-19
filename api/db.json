@@ -1,14 +1,6 @@
 {
   "notes": [
     {
-      "fav": "false",
-      "tags": "iasdj iasjd oiasj diosaji odjsai jdjdias  da",
-      "title": "1234",
-      "description": "- List\n- List2",
-      "created_at": "19.08.2024",
-      "id": "GTvQEIIA2"
-    },
-    {
       "fav": "true",
       "tags": "tag4",
       "title": "4",
@@ -26,7 +18,7 @@
     },
     {
       "fav": false,
-      "tags": "",
+      "tags": "555",
       "title": "Tes",
       "description": "tt",
       "created_at": "19.08.2024",

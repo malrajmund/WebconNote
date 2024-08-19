@@ -8,4 +8,10 @@
     &__header {
         text-align: center;
     }
+
+    @include respond-to(lg) {
+        &__list {
+            justify-content: center;
+        }
+    }
 }

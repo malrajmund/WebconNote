@@ -1,4 +1,8 @@
 .main-template {
+    &__wrapper {
+        height: 100%;
+        display: flex;
+    }
     &__content {
         padding: 20px;
         width: 92%;
@@ -10,5 +14,26 @@
         font-size: 30px;
         margin-bottom: 30px;
         text-align: center;
+    }
+    @include respond-to(xxl) {
+        &__content {
+            width: 90%;
+        }
+    }
+    @include respond-to(xl) {
+        &__content {
+            width: 85%;
+        }
+    }
+    @include respond-to(md) {
+        &__wrapper {
+            flex-direction: column;
+        }
+        &__content {
+            flex: 1;
+            height: auto;
+            width: 100%;
+            overflow-y: auto;
+        }
     }
 }

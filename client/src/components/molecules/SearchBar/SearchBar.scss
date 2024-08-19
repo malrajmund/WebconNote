@@ -24,9 +24,6 @@
 
         &--visible {
             visibility: visible;
-            &::after {
-                visibility: hidden;
-            }
         }
 
         input {
@@ -34,6 +31,18 @@
             color: $color-white;
             border: none;
             border-radius: $border-radius;
+        }
+    }
+
+    @include respond-to(md) {
+        &__input {
+            left: -71px;
+            top: 130%;
+            &::after {
+                top: -10px;
+                left: 87px;
+                transform: rotate(180deg);
+            }
         }
     }
 }

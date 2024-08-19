@@ -79,6 +79,7 @@ export function* addNoteSaga(action: PayloadAction<Note>) {
 
     try {
         yield call(axios.post, `${BACKEND}${NOTES}`, requestBody);
+        channel.postMessage({ type: 'UPDATE_NOTE' });
         yield call(getNotesSaga);
     } catch (error) {
         console.log(error);
@@ -89,6 +90,7 @@ export function* deleteNoteSaga(action: PayloadAction<Note>) {
     const id = action.payload.id;
     try {
         yield call(axios.delete, `${BACKEND}${NOTES}/${id}`);
+        channel.postMessage({ type: 'UPDATE_NOTE' });
         yield call(getNotesSaga);
     } catch (error) {
         console.log(error);

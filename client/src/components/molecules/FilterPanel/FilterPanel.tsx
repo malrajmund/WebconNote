@@ -56,19 +56,18 @@ const FilterPanel: React.FC = () => {
         <div className="filter-panel__wrapper">
             <Button buttonVariant={ButtonVariant.icon} iconVariant="filter" onClick={handleToggleList} />
             {isOpen && (
-                <>
-                    <div className="filter-panel__tags">
-                        {items &&
-                            items
-                                .filter(tag => tag !== '')
-                                .map((tag: string) => (
-                                    <Tag key={tag} activeFilter={filter} label={tag} onClick={handleFilter(tag)} />
-                                ))}
-                    </div>
+                <div className="filter-panel__tags">
+                    {items &&
+                        items
+                            .filter(tag => tag !== '')
+                            .map((tag: string) => (
+                                <Tag key={tag} activeFilter={filter} label={tag} onClick={handleFilter(tag)} />
+                            ))}
+
                     <Button buttonVariant={favoritesButtonVariant} onClick={handleToggleFavorites} iconVariant="star">
                         Favorites
                     </Button>
-                </>
+                </div>
             )}
         </div>
     );
