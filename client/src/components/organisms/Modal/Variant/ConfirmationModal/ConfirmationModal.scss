@@ -1,0 +1,18 @@
+.confirmation-modal {
+    &__wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    &__header {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: end;
+        align-items: end;
+        margin-top: auto;
+    }
+}

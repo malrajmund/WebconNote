@@ -12,6 +12,7 @@ import EditNoteModal from '../../organisms/Modal/Variant/EditNoteModal/EditNoteM
 import ManageTagModal from '../../organisms/Modal/Variant/ManageTagModal/ManageTagModal';
 import { clearTag, setTag } from '../../../redux/reducers/tags/tagsReducer';
 import clsx from 'clsx';
+import ConfirmationModal from '../../organisms/Modal/Variant/ConfirmationModal/ConfirmationModal';
 
 type NoteProps = ComponentPropsWithoutRef<'li'> & {
     variant: NoteVariantType;
@@ -92,7 +93,19 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                 <h2 className="note__title" onClick={handleEdit(id)}>
                     {title}
                 </h2>
-                <Button buttonVariant={ButtonVariant.note} iconVariant="delete" onClick={handleDelete(id)} />
+                <Modal
+                    id={id}
+                    title="Delete note"
+                    onOpen={handleEditNoteThroughModal}
+                    trigger={<Button buttonVariant={ButtonVariant.note} iconVariant="delete" />}
+                    noHeight
+                >
+                    <ConfirmationModal
+                        onConfirmText="Delete"
+                        header={`Do you want to delete note: ${title}?`}
+                        onConfirm={handleDelete(id)}
+                    />
+                </Modal>
                 <Modal
                     id={id}
                     title="Edit note"
