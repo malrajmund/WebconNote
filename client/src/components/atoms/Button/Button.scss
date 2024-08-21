@@ -23,6 +23,7 @@
         color: $color-white;
     }
     &--icon {
+        padding: 0;
         border: 1px solid transparent;
         width: 40px;
         height: 40px;
@@ -41,6 +42,7 @@
         }
     }
     &--icon-active {
+        padding: 0;
         border: 1px solid $color-black;
         width: 40px;
         height: 40px;
@@ -55,6 +57,7 @@
         }
     }
     &--note {
+        padding-inline: 4px;
         background-color: transparent;
         color: $color-semi-transparent;
         transition: 0.6s ease color;
@@ -67,6 +70,7 @@
         }
     }
     &--note-fav {
+        padding-inline: 4px;
         background-color: transparent;
         color: $color-black;
         transition: 0.6s ease color;
