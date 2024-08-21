@@ -5,7 +5,7 @@ import { ButtonVariant } from '../../atoms/Button/constants';
 import clsx from 'clsx';
 
 type ModalProps = {
-    trigger: React.ReactNode;
+    trigger: JSX.Element;
     title: string;
     id: string;
     children: React.ReactElement;

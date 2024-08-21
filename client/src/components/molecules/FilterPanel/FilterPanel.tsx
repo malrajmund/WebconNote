@@ -43,17 +43,17 @@ const FilterPanel: React.FC = () => {
         dispatch(getFavoriteNotes());
     }, [dispatch, isToggledFavorites]);
 
-    const resetFilter = () => {
+    const resetFilter = useCallback(() => {
         setIsToggledFavorites(false);
         dispatch(setFilter({ filter: '' }));
-    };
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(getTags());
     }, []);
 
     return (
-        <div className="filter-panel__wrapper">
+        <div aria-label="filterPanel" className="filter-panel__wrapper">
             <Button buttonVariant={ButtonVariant.icon} iconVariant="filter" onClick={handleToggleList} />
             {isOpen && (
                 <div className="filter-panel__tags">

@@ -31,7 +31,7 @@ const NotesList: React.FC = () => {
     }, []);
 
     return notes && notes.length > 0 ? (
-        <ul className="notes__list">
+        <ul className="notes__list" aria-label="notesList">
             {isLoading ? (
                 <Loader />
             ) : (

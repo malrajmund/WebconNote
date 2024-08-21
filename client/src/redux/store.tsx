@@ -6,7 +6,7 @@ import tagsReducer from './reducers/tags/tagsReducer';
 
 export const channel = new BroadcastChannel('note_channel');
 
-const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
     reducer: {
@@ -20,4 +20,5 @@ sagaMiddleware.run(rootSaga);
 
 export type AppState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppStore = typeof store;
 export default store;

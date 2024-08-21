@@ -14,7 +14,7 @@ import { clearTag, setTag } from '../../../redux/reducers/tags/tagsReducer';
 import clsx from 'clsx';
 import ConfirmationModal from '../../organisms/Modal/Variant/ConfirmationModal/ConfirmationModal';
 
-type NoteProps = ComponentPropsWithoutRef<'li'> & {
+export type NoteProps = ComponentPropsWithoutRef<'li'> & {
     variant: NoteVariantType;
 };
 
@@ -88,7 +88,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
     }, []);
 
     return (
-        <li className={clsx('note', `note--${variant}`)}>
+        <li aria-label="note" className={clsx('note', `note--${variant}`)}>
             <div className="note__header">
                 <h2 className="note__title" onClick={handleEdit(id)}>
                     {title}
@@ -114,7 +114,12 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                 >
                     <EditNoteModal />
                 </Modal>
-                <Button onClick={handleToggleFavorityNote} buttonVariant={isFavorite} iconVariant="star" />
+                <Button
+                    ariaLabel="favorite"
+                    onClick={handleToggleFavorityNote}
+                    buttonVariant={isFavorite}
+                    iconVariant="star"
+                />
             </div>
             <p className="note__description">{description}</p>
             <div className="note__footer">

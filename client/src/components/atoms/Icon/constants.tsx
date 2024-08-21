@@ -2,12 +2,12 @@ import { FaPlus, FaTrash, FaEdit, FaArrowLeft, FaFilter, FaSearch, FaStar } from
 import { IconVariant } from './Icon.types';
 
 export const IconMap: Record<IconVariant, React.ReactNode> = {
-    add: <FaPlus />,
+    add: <FaPlus aria-label={'add'} />,
     edit: <FaEdit />,
     delete: <FaTrash />,
     back: <FaArrowLeft />,
     filter: <FaFilter />,
     search: <FaSearch />,
-    star: <FaStar />,
+    star: <FaStar aria-label={'star'} />,
     default: null,
 };
