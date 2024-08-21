@@ -14,12 +14,19 @@
         font-size: 24px;
         margin-bottom: 30px;
         text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 80%;
+        margin-inline: auto;
     }
     &-body {
-        height: 300px;
+        min-height: 300px;
         position: relative;
+        overflow-y: auto;
         &--no-height {
-            height: 100px;
+            min-height: initial;
+            height: auto;
         }
     }
     @include respond-to(xxl) {

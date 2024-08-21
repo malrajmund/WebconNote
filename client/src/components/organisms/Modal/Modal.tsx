@@ -23,6 +23,15 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeigh
         setIsOpen(true);
     }, [onOpen]);
 
+    const handleClose = useCallback(() => {
+        onClose && onClose();
+        setIsOpen(false);
+    }, [onClose]);
+
+    const handleCloseOnButton = useCallback(() => {
+        setIsOpen(false);
+    }, []);
+
     return (
         <Popup
             open={isOpen}
@@ -32,20 +41,9 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, onOpen, noHeigh
             closeOnDocumentClick
             nested
             onOpen={handleOnOpen}
-            onClose={() => {
-                onClose && onClose();
-                setIsOpen(false);
-            }}
+            onClose={handleClose}
         >
-            <Button
-                buttonVariant={ButtonVariant.icon}
-                iconVariant="back"
-                onClick={() => {
-                    onClose && onClose();
-                    setIsOpen(false);
-                }}
-                isAbsolute
-            />
+            <Button buttonVariant={ButtonVariant.icon} iconVariant="back" onClick={handleCloseOnButton} isAbsolute />
             <h2 className="popup-header">{title}</h2>
             <div className={clsx('popup-body', { 'popup-body--no-height': noHeight })}>{childWithProps}</div>
         </Popup>
