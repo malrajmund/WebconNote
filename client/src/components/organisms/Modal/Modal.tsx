@@ -4,7 +4,7 @@ import Button from '../../atoms/Button/Button';
 import { ButtonVariant } from '../../atoms/Button/constants';
 import clsx from 'clsx';
 
-type ModalProps = {
+export type ModalProps = {
     trigger: JSX.Element;
     title: string;
     id: string;

@@ -1,43 +1,30 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button, { ButtonProps } from './Button';
-import { ButtonVariant } from './constants';
 import { IconMap } from '../Icon/constants';
+import Icon, { IconProps } from './Icon';
 import StoryBlock from '../../../utils/storybook/StoryBlock';
 
-const meta: Meta<typeof Button> = {
-    title: 'Components/Button',
-    component: Button,
+const meta: Meta<typeof Icon> = {
+    title: 'Components/Icon',
+    component: Icon,
     argTypes: {
-        buttonVariant: {
-            control: 'select',
-            options: Object.values(ButtonVariant),
-            description: 'The variant of the button.',
-            defaultValue: ButtonVariant.dark,
-        },
-        iconVariant: {
+        variant: {
             control: 'select',
             options: Object.keys(IconMap),
-        },
-        type: {
-            control: 'text',
         },
     },
 };
 
 export default meta;
 
-export const ButtonStory: StoryObj<ButtonProps> = {
+export const IconStory: StoryObj<IconProps> = {
     args: {
-        children: 'Controllable button',
-        buttonVariant: ButtonVariant.dark,
-        iconVariant: 'default',
-        type: 'button',
+        variant: 'search',
     },
 
     render: args => {
         return (
             <>
-                <StoryBlock title="Controllable button">
+                <StoryBlock title="Controllable icon">
                     <table>
                         <thead>
                             <tr>
@@ -47,18 +34,20 @@ export const ButtonStory: StoryObj<ButtonProps> = {
                         <tbody>
                             <tr>
                                 <td>
-                                    <Button {...args} />
+                                    <Icon {...args} />
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </StoryBlock>
-                <StoryBlock title="Button variants">
+                <StoryBlock title="Icon variants">
                     <table>
                         <thead>
                             <tr>
-                                <td>light</td>
+                                <td>add</td>
+                                <td>delete</td>
                                 <td>edit</td>
+                                <td>back</td>
                                 <td>star</td>
                                 <td>filter</td>
                             </tr>
@@ -66,16 +55,22 @@ export const ButtonStory: StoryObj<ButtonProps> = {
                         <tbody>
                             <tr>
                                 <td>
-                                    <Button buttonVariant={ButtonVariant.light}>Light</Button>
+                                    <Icon variant="add" />
                                 </td>
                                 <td>
-                                    <Button buttonVariant={ButtonVariant.note} iconVariant="edit" />
+                                    <Icon variant="delete" />
                                 </td>
                                 <td>
-                                    <Button buttonVariant={ButtonVariant['note-fav']} iconVariant="star" />
+                                    <Icon variant="edit" />
                                 </td>
                                 <td>
-                                    <Button buttonVariant={ButtonVariant.icon} iconVariant="filter" />
+                                    <Icon variant="back" />
+                                </td>
+                                <td>
+                                    <Icon variant="star" />
+                                </td>
+                                <td>
+                                    <Icon variant="filter" />
                                 </td>
                             </tr>
                         </tbody>

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { ComponentPropsWithoutRef } from 'react';
 
-type TagProps = ComponentPropsWithoutRef<'div'> & {
+export type TagProps = ComponentPropsWithoutRef<'div'> & {
     label: string;
     onClick?: () => void;
     activeFilter?: string | null;

@@ -30,6 +30,10 @@
         background-color: $color-black;
         color: $color-white;
         transition: 0.6s ease background-color;
+        svg {
+            height: 16px;
+            width: 16px;
+        }
         &:hover {
             border: 1px solid $color-black;
             background-color: $color-white;

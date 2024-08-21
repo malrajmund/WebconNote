@@ -1,7 +1,7 @@
 {
   "notes": [
     {
-      "fav": "false",
+      "fav": "true",
       "tags": "555",
       "title": "Title",
       "description": "Description",
@@ -9,8 +9,8 @@
       "id": "AKkN_Mgc5"
     },
     {
-      "fav": false,
-      "tags": "new tag",
+      "fav": "false",
+      "tags": "",
       "title": "Notka",
       "description": "Opis\nJakis",
       "created_at": "20.08.2024",

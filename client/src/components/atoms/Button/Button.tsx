@@ -28,7 +28,11 @@ const Button = React.memo(
             ref
         ) => {
             const isVisibleChildren =
-                children && buttonVariant !== 'icon' && buttonVariant !== 'note' && buttonVariant !== 'note-fav';
+                children &&
+                buttonVariant !== 'icon' &&
+                buttonVariant !== 'note' &&
+                buttonVariant !== 'note-fav' &&
+                buttonVariant !== 'icon-active';
             return (
                 <button
                     aria-label={ariaLabel}

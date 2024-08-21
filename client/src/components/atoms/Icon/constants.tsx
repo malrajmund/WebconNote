@@ -9,5 +9,5 @@ export const IconMap: Record<IconVariant, React.ReactNode> = {
     filter: <FaFilter />,
     search: <FaSearch />,
     star: <FaStar aria-label={'star'} />,
-    default: null,
+    default: <FaPlus aria-label={'add'} />,
 };

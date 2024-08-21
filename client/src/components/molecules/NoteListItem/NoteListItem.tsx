@@ -148,7 +148,7 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                                 noHeight
                                 onClose={handleClearTag}
                             >
-                                <ManageTagModal />
+                                <ManageTagModal showDelete />
                             </Modal>
                         ))}
                 </div>

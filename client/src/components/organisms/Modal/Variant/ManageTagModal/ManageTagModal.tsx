@@ -11,9 +11,10 @@ import { Note } from '../../../../../redux/reducers/notes/types';
 type ManageTagModalProps = {
     setIsOpen?: (isOpen: boolean) => void;
     isOpen?: boolean;
+    showDelete?: boolean;
 };
 
-const ManageTagModal: React.FC<ManageTagModalProps> = ({ setIsOpen, isOpen }) => {
+const ManageTagModal: React.FC<ManageTagModalProps> = ({ setIsOpen, isOpen, showDelete }) => {
     const dispatch = useDispatch();
     const [fields, setFields] = useState<FormFieldConfig[]>(tagFields);
     const { loading, tags, id } = useSelector((state: AppState) => state.notes.currentNote) as Note;
@@ -50,7 +51,7 @@ const ManageTagModal: React.FC<ManageTagModalProps> = ({ setIsOpen, isOpen }) =>
     ) : (
         <>
             <Form
-                handleDelete={handleDelete}
+                handleDelete={showDelete ? handleDelete : undefined}
                 fields={fields}
                 onSubmit={handleFormSubmit}
                 submitButtonText={currentTag ? 'Save' : 'Add'}
