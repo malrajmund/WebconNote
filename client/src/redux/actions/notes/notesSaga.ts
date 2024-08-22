@@ -76,7 +76,6 @@ export function* addNoteSaga(action: PayloadAction<Note>) {
         description: action.payload.description,
         created_at: action.payload.created_at,
     };
-
     try {
         yield call(axios.post, `${BACKEND}${NOTES}`, requestBody);
         channel.postMessage({ type: 'UPDATE_NOTE' });

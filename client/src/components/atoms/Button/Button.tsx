@@ -7,46 +7,36 @@ import { ButtonVariant } from './constants';
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     iconVariant?: IconVariant;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>, ...args: any[]) => void;
+    onClick?: void | ((event: React.MouseEvent<HTMLButtonElement>, ...args: unknown[]) => void);
     buttonVariant?: ButtonVariantType;
     isAbsolute?: boolean;
     ariaLabel?: string;
 };
 
-const Button = React.memo(
-    React.forwardRef<HTMLButtonElement, ButtonProps>(
-        (
-            {
-                type = 'button',
-                ariaLabel,
-                buttonVariant = ButtonVariant.dark,
-                children,
-                onClick,
-                iconVariant,
-                isAbsolute,
-            },
-            ref
-        ) => {
-            const isVisibleChildren =
-                children &&
-                buttonVariant !== 'icon' &&
-                buttonVariant !== 'note' &&
-                buttonVariant !== 'note-fav' &&
-                buttonVariant !== 'icon-active';
-            return (
-                <button
-                    aria-label={ariaLabel}
-                    ref={ref}
-                    type={type}
-                    onClick={onClick && onClick}
-                    className={clsx('button', `button--${buttonVariant}`, { 'button--absolute': isAbsolute })}
-                >
-                    {iconVariant && <Icon variant={iconVariant} />}
-                    {isVisibleChildren && children}
-                </button>
-            );
-        }
-    )
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+    (
+        { type = 'button', ariaLabel, buttonVariant = ButtonVariant.dark, children, onClick, iconVariant, isAbsolute },
+        ref
+    ) => {
+        const isVisibleChildren =
+            children &&
+            buttonVariant !== 'icon' &&
+            buttonVariant !== 'note' &&
+            buttonVariant !== 'note-fav' &&
+            buttonVariant !== 'icon-active';
+        return (
+            <button
+                aria-label={ariaLabel}
+                ref={ref}
+                type={type}
+                onClick={onClick && onClick}
+                className={clsx('button', `button--${buttonVariant}`, { 'button--absolute': isAbsolute })}
+            >
+                {iconVariant && <Icon variant={iconVariant} />}
+                {isVisibleChildren && children}
+            </button>
+        );
+    }
 );
 
-export default Button;
+export default React.memo(Button);

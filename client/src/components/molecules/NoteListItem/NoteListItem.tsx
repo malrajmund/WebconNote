@@ -69,12 +69,9 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
         );
     }, [dispatch, title, description, variant, id, created_at, tags, fav]);
 
-    const handleDelete = useCallback(
-        (id: string) => {
-            return () => dispatch(deleteNote({ id: id }));
-        },
-        [dispatch]
-    );
+    const handleDelete = useCallback(() => {
+        dispatch(deleteNote({ id: id }));
+    }, [dispatch, id]);
 
     const handleEdit = useCallback(
         (id: string) => {
@@ -85,10 +82,10 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
 
     const handleClearTag = useCallback(() => {
         return dispatch(clearTag());
-    }, []);
+    }, [dispatch]);
 
     return (
-        <li aria-label="note" className={clsx('note', `note--${variant}`)}>
+        <li data-note-id={id} aria-label="note" className={clsx('note', `note--${variant}`)}>
             <div className="note__header">
                 <h2 className="note__title" onClick={handleEdit(id)}>
                     {title}
@@ -97,13 +94,15 @@ const NoteListItem: React.FC<Note & NoteProps> = ({
                     id={id}
                     title="Delete note"
                     onOpen={handleEditNoteThroughModal}
-                    trigger={<Button buttonVariant={ButtonVariant.note} iconVariant="delete" />}
+                    trigger={
+                        <Button ariaLabel="deleteNoteButton" buttonVariant={ButtonVariant.note} iconVariant="delete" />
+                    }
                     noHeight
                 >
                     <ConfirmationModal
                         onConfirmText="Delete"
                         header={`Do you want to delete note: ${title}?`}
-                        onConfirm={handleDelete(id)}
+                        onConfirm={handleDelete}
                     />
                 </Modal>
                 <Modal

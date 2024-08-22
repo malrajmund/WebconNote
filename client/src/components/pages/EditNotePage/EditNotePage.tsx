@@ -20,7 +20,7 @@ const EditNotePage: React.FC = () => {
             dispatch(updateNote({ id: id ? id : '', title: formData.title, description: formData.description }));
             dispatch(clearNote());
         },
-        [dispatch]
+        [dispatch, id]
     );
 
     useEffect(() => {

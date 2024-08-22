@@ -22,7 +22,12 @@ const SideBar: React.FC<SideBarProps> = ({ isHomepage }) => {
             )}
             {isHomepage && (
                 <>
-                    <Button buttonVariant={ButtonVariant.icon} iconVariant={'add'} onClick={handleAddNoteClick} />
+                    <Button
+                        ariaLabel="addNoteButton"
+                        buttonVariant={ButtonVariant.icon}
+                        iconVariant={'add'}
+                        onClick={handleAddNoteClick}
+                    />
                     <SearchBar />
                     <FilterPanel />
                 </>

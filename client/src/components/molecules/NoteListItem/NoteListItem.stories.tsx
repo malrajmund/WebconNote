@@ -9,9 +9,7 @@ const meta: Meta<typeof NoteListItem> = {
     title: 'Components/NoteListItem',
     component: NoteListItem,
     argTypes: {
-        id: {
-            control: 'text',
-        },
+        id: { table: { disabled: true } },
         fav: {
             control: 'select',
             options: ['true', 'false'],
@@ -39,7 +37,6 @@ export default meta;
 
 export const NoteListItemStory: StoryObj<Note & NoteProps> = {
     args: {
-        id: '9292',
         fav: 'true',
         created_at: '21.08.2024',
         variant: NoteVariant.secondary,

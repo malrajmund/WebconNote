@@ -86,7 +86,7 @@ const Form: React.FC<FormProps> = ({
                         Delete
                     </Button>
                 )}
-                <Button type="submit" buttonVariant={ButtonVariant.dark}>
+                <Button ariaLabel="submitFormButton" type="submit" buttonVariant={ButtonVariant.dark}>
                     {submitButtonText}
                 </Button>
             </div>

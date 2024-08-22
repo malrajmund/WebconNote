@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { render, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
-import { AppStore, sagaMiddleware } from '../../../../redux/store';
+import { AppStore } from '../../../../redux/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
@@ -10,8 +10,10 @@ import notesReducer from '../../../../redux/reducers/notes/notesReducer';
 import tagsReducer from '../../../../redux/reducers/tags/tagsReducer';
 import NotesList from '../../../../components/organisms/NotesList/NotesList';
 import rootSaga from '../../../../redux/actions/rootSaga';
+import createSagaMiddleware from 'redux-saga';
 
 describe('NoteList integration tests', () => {
+    const sagaMiddleware = createSagaMiddleware();
     const user = userEvent.setup();
     let store: AppStore;
 

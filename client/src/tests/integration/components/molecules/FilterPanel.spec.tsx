@@ -45,7 +45,7 @@ describe('FilterPanel integration tests', () => {
         );
         expect(tagFilter).toBeInTheDocument();
         await user.click(tagFilter!);
-        const state = store.getState();
-        await waitFor(() => expect(state.notes.filter).toEqual(tagFilter!.textContent?.replace('#', '')));
+        const filter = store.getState().notes.filter;
+        await waitFor(() => expect(filter).toEqual(tagFilter!.textContent?.replace('#', '')));
     });
 });
